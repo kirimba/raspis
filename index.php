@@ -217,8 +217,18 @@ title="HotLog" alt="HotLog"></a>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title">Добавление пары</h4>
 		      </div>
-		      <form role="form" name="add-para" method="post" action="/?page=add-par">
+		      <form role="form" name="add-para" method="post" action="/">
+		      <!--<form role="form" name="add-para" method="post" action="/?page=add-par">-->
 		      	<div class="modal-body">
+		      		<div class="form-group">
+			      		<label for="inputTime">Время</label>
+			      		<div class="input-group">
+							<span class="input-group-addon">с</span>
+							<input type="time" name="time-par1" class="form-control" id="inputTime" required>
+							<span class="input-group-addon">по</span>
+							<input type="time" name="time-par2" class="form-control" id="inputTime1" required>
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="inputDay">День недели</label>
 						<select name="day-par" class="form-control" id="inputDay">
@@ -257,11 +267,23 @@ title="HotLog" alt="HotLog"></a>
 					</div>
 					<div class="form-group">
 						<label for="inputWeek">По каким неделям</label>
-					    <input name="week-par" type="text" class="form-control" id="inputWeek" placeholder="По каким неделям" required>
+						<div class="input-group">
+					    	<input name="week-par" type="text" class="form-control" id="inputWeek" placeholder="По каким неделям" required>
+					    	<span class="input-group-addon">1, 3, 4, 5</span>
+					    </div>
 					</div>
 					<div class="form-group">
 						<label for="inputPrepod">Преподаватель</label>
-					    <input name="prepod-par" type="text" class="form-control" id="inputPrepod" placeholder="Преподаватель" required>
+						<div class="input-group">
+						    <input name="prepod-par1" type="text" class="form-control" id="inputPrepod" placeholder="Иванов И.И." required>
+						    <span class="input-group-addon">Сокращенно</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+						    <input name="prepod-par2" type="text" class="form-control" id="inputPrepod1" placeholder="Иванов Иван Иванович" required>
+						    <span class="input-group-addon">Полностью</span>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputAyd">Аудитория</label>

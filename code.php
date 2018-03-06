@@ -93,72 +93,72 @@ if($_GET['page'] == 'add-grup'){
 		}
 }//-------------------------Добаление группы
 elseif($_GET['page'] == 'add-par-bonch'){//Добавление группы и пар из Бонч
-if($_SESSION['mast']){
-	if(isset($_POST['data-tart-grup'], $_POST['pin-grup'])){
-		$time11 = strtotime('+ 3 hour');
-		$data11 = date("d.m.Y H:i", $time11);
-		
-		// проверяем, что файл загружался
-	  if(isset($_FILES['file-grup']) && $_FILES['file-grup']['error'] != 4)
-	  {
-	    // проверяем, что файл загрузился без ошибок
-		if($_FILES['file-grup']['error'] != 1 && $_FILES['file-grup']['error'] != 0)
-		{
-		  $error = $_FILES['file-grup']['error'];
-		  $alert = '<div class="alert alert-danger">Ошибка: Файл не загружен. Код ошибки: '.$error.'</div>';
-		}
-		else
-	    {
-	      // файл загружен на сервер
+	if($_SESSION['mast']){
+		if(isset($_POST['data-tart-grup'], $_POST['pin-grup'])){
+			$time11 = strtotime('+ 3 hour');
+			$data11 = date("d.m.Y H:i", $time11);
+			
+			// проверяем, что файл загружался
+		  if(isset($_FILES['file-grup']) && $_FILES['file-grup']['error'] != 4)
+		  {
+		    // проверяем, что файл загрузился без ошибок
+			if($_FILES['file-grup']['error'] != 1 && $_FILES['file-grup']['error'] != 0)
+			{
+			  $error = $_FILES['file-grup']['error'];
+			  $alert = '<div class="alert alert-danger">Ошибка: Файл не загружен. Код ошибки: '.$error.'</div>';
+			}
+			else
+		    {
+		      // файл загружен на сервер
 
-	      // проверяем файл на максимальный размер
-		  $filesize = $_FILES['file-grup']['size'];
-		  if($_FILES['file-grup']['error'] == 1 || ($filesize < 1024*1024*30 && $filesize > 1024*1024*10))
-		  {
-		   	//$filesize = ($filesize != 0)? sprintf('(%.2f Кб)' , $filesize / 1024): '';
-		   	//$alert = '<div class="alert alert-danger">Ошибка: Размер прикреплённого файла '. $filesize.' больше допустимого (3 Мб).</div>';
-		   	$alert = '<div class="alert alert-danger">Ошибка: Размер прикреплённого файла не соответствует ожиданию.</div>';
-		  }
-		  else
-		  {
-		   	$filepath = $_FILES['file-grup']['tmp_name'];
-		   	$filetype = $_FILES['file-grup']['type'];
-		   	if($filetype != null && $filetype != '' && $filetype == 'text/html'){
-				$file = file($filepath);
-				foreach($file as $stro){
-					$pos = strpos($stro, '<tr>');
-					if(!($pos === FALSE)){
-						$pos = stristr($stro, '<tr>');
-						$pos = substr($pos, 0, strpos($pos, '</tbody>'));
-						$pos = iconv("cp1251", "utf-8", $pos);
-						$name_grup = htmlspecialchars($_POST['name-grup']);
-						$gruptra = rus2translit($name_grup);
-						//$alert = '<table  border="1"><tbody>'.$pos.'</tbody></table>';
-						file_put_contents('raspisanie/'.$gruptra.' '.$data11.'.txt', $pos);
-						
-						$data_start = htmlspecialchars($_POST['data-tart-grup']);
-						$pin_grup = (int)htmlspecialchars($_POST['pin-grup']);
-						$data_start1 = explode('-', $data_start);
-						$data_start = mktime(0,0,0,$data_start1['1'],$data_start1['2'], $data_start1['0']);
-						if($mysqli->query("INSERT INTO `grups` (`name`, `start`, `pin`) VALUES ('$name_grup', '$data_start', '$pin_grup')")){
-							$alert = '<div class="alert alert-success">Группа добавлена</div>';
-							$id_grup = (string)$mysqli->insert_id;
-							require("upload_raspis.php");
-						}else
-						$alert = '<div class="alert alert-danger">Ошибка добавления</div>';
+		      // проверяем файл на максимальный размер
+			  $filesize = $_FILES['file-grup']['size'];
+			  if($_FILES['file-grup']['error'] == 1 || ($filesize < 1024*1024*30 && $filesize > 1024*1024*10))
+			  {
+			   	//$filesize = ($filesize != 0)? sprintf('(%.2f Кб)' , $filesize / 1024): '';
+			   	//$alert = '<div class="alert alert-danger">Ошибка: Размер прикреплённого файла '. $filesize.' больше допустимого (3 Мб).</div>';
+			   	$alert = '<div class="alert alert-danger">Ошибка: Размер прикреплённого файла не соответствует ожиданию.</div>';
+			  }
+			  else
+			  {
+			   	$filepath = $_FILES['file-grup']['tmp_name'];
+			   	$filetype = $_FILES['file-grup']['type'];
+			   	if($filetype != null && $filetype != '' && $filetype == 'text/html'){
+					$file = file($filepath);
+					foreach($file as $stro){
+						$pos = strpos($stro, '<tr>');
+						if(!($pos === FALSE)){
+							$pos = stristr($stro, '<tr>');
+							$pos = substr($pos, 0, strpos($pos, '</tbody>'));
+							$pos = iconv("cp1251", "utf-8", $pos);
+							$name_grup = htmlspecialchars($_POST['name-grup']);
+							$gruptra = rus2translit($name_grup);
+							//$alert = '<table  border="1"><tbody>'.$pos.'</tbody></table>';
+							file_put_contents('raspisanie/'.$gruptra.' '.$data11.'.txt', $pos);
+							
+							$data_start = htmlspecialchars($_POST['data-tart-grup']);
+							$pin_grup = (int)htmlspecialchars($_POST['pin-grup']);
+							$data_start1 = explode('-', $data_start);
+							$data_start = mktime(0,0,0,$data_start1['1'],$data_start1['2'], $data_start1['0']);
+							if($mysqli->query("INSERT INTO `grups` (`name`, `start`, `pin`) VALUES ('$name_grup', '$data_start', '$pin_grup')")){
+								$alert = '<div class="alert alert-success">Группа добавлена</div>';
+								$id_grup = (string)$mysqli->insert_id;
+								require("upload_raspis.php");
+							}else
+							$alert = '<div class="alert alert-danger">Ошибка добавления</div>';
+						}
 					}
+					
+				}else{
+					$alert = $alert.'<div class="alert alert-danger">Ошибка: Что ты тут загружаешь?</div>';
 				}
-				
-			}else{
-				$alert = $alert.'<div class="alert alert-danger">Ошибка: Что ты тут загружаешь?</div>';
+			  }
 			}
 		  }
 		}
-	  }
+	}else{
+		$alert = '<div class="alert alert-danger">Ошибка</div>';
 	}
-}else{
-	$alert = '<div class="alert alert-danger">Ошибка</div>';
-}
 }//----------------Добавление группы и пар из Бонч
 else{
 	if(!((!isset($_COOKIE['id'])) or $vibr_grup)) //после Выбор группы
@@ -178,25 +178,30 @@ else{
 		//$week = 13;
 		//$day_num = 2;
 		
-		if($_GET['page'] == 'add-par'){
-			if(isset($pin) and ($_COOKIE['pin'.$id_grup] == $pin)){
-				if(isset($_POST['name-par'], $_POST['type-par'], $_POST['num-par'], $_POST['day-par'], $_POST['aud-par'], $_POST['week-par'], $_POST['prepod-par']))
-				{
-				$name_par = htmlspecialchars($_POST['name-par']);
-				$type_par = htmlspecialchars($_POST['type-par']);
-				$num_par = htmlspecialchars($_POST['num-par']);
-				$day_par = htmlspecialchars($_POST['day-par']);
-				$week_par = htmlspecialchars($_POST['week-par']);
-				$aud_par = htmlspecialchars($_POST['aud-par']);
-				$prepod_par = htmlspecialchars($_POST['prepod-par']);
-				if($mysqli->query("INSERT INTO `raspis` (`id_grup`, `para`, `den`, `name`, `type`, `weeks`, `auditor`, `prepod`) VALUES ('$id_grup', '$num_par', '$day_par', '$name_par', '$type_par', '$week_par', '$aud_par', '$prepod_par')"))
-				$alert2 = '<div class="alert alert-success">Пара добавлена</div>';
-				else
-				$alert2 = '<div class="alert alert-danger">Ошибка добавления</div>';
-				}
-			}else
+		if(isset($pin) and ($_COOKIE['pin'.$id_grup] == $pin)){
+			if(isset($_POST['name-par'], $_POST['type-par'], $_POST['num-par'], $_POST['day-par'], $_POST['aud-par'], $_POST['week-par'], $_POST['prepod-par1']))
+			{
+			$name_par = htmlspecialchars($_POST['name-par']);
+			$type_par = htmlspecialchars($_POST['type-par']);
+			$num_par = htmlspecialchars($_POST['num-par']);
+			$day_par = htmlspecialchars($_POST['day-par']);
+			$week_par = htmlspecialchars($_POST['week-par']);
+			$aud_par = htmlspecialchars($_POST['aud-par']);
+			$prepod_par1 = htmlspecialchars($_POST['prepod-par1']);
+			$prepod_par2 = htmlspecialchars($_POST['prepod-par2']);
+			$time_par1 = htmlspecialchars($_POST['time-par1']);
+			$time_par2 = htmlspecialchars($_POST['time-par2']);
+			$time_par = '('.$time_par1.'-'.$time_par2.')';
+			$prepod_par = '<span title="'.$prepod_par2.'"><i>'.$prepod_par1.'</i></span>';
+			if($mysqli->query("INSERT INTO `raspis` (`id_grup`, `time`, `para`, `den`, `name`, `type`, `weeks`, `auditor`, `prepod`) VALUES ('$id_grup', '$time_par', '$num_par', '$day_par', '$name_par', '$type_par', '$week_par', '$aud_par', '$prepod_par')"))
+			$alert2 = '<div class="alert alert-success">Пара добавлена</div>';
+			else
+			$alert2 = '<div class="alert alert-danger">Ошибка добавления</div>';
+			}
+		}else
 			$alert2 = '<div class="alert alert-danger">Вам не доступно редактирование этой группы</div>';
-		} //------------------------------Добавление пары
+		
+		if($_GET['page'] == 'add-par'){} //------------------------------Добавление пары
 		elseif($_GET['page'] == 'allow-edit-par'){}
 		elseif($_GET['page'] == 'all-par'){}
 		else{

@@ -59,7 +59,8 @@ require("code.php");
             		<?php
             		if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
             		echo '<li class="divider"></li>
-            		<li><a href="/?page=add-par">Добавить пару</a></li>';
+            		<li><a href="#" data-toggle="modal" data-target="#add_par_modal">Добавить пару</a></li>';
+            		//<li><a href="/?page=add-par">Добавить пару</a></li>';
             		//<li class="disabled"><a href="/?page=edit-par">Редактировать пары</a></li>';
             		}
             		if($_SESSION['mast']){
@@ -205,66 +206,80 @@ title="HotLog" alt="HotLog"></a>
 		if(!isset($error1)){
 			if(isset($alert2))
 			echo $alert2;
-		if($_GET['page'] == 'add-par'){
+		
+		//if($_GET['page'] == 'add-par'){
 			if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
 		?>
-		<div class="panel panel-body">
-			<form role="form" name="add-para" method="post" action="/?page=add-par">
-				<div class="form-group">
-					<label for="inputDay">День недели</label>
-					<select name="day-par" class="form-control" id="inputDay">
-					  <option value="1">Понедельник</option>
-					  <option value="2">Вторник</option>
-					  <option value="3">Среда</option>
-					  <option value="4">Четверг</option>
-					  <option value="5">Пятница</option>
-					  <option value="6">Суббота</option>
-					  <option value="0">Воскресенье</option>
-					</select>
+		<div class="modal fade" id="add_par_modal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Добавление пары</h4>
+		      </div>
+		      <form role="form" name="add-para" method="post" action="/?page=add-par">
+		      	<div class="modal-body">
+					<div class="form-group">
+						<label for="inputDay">День недели</label>
+						<select name="day-par" class="form-control" id="inputDay">
+						  <option value="1">Понедельник</option>
+						  <option value="2">Вторник</option>
+						  <option value="3">Среда</option>
+						  <option value="4">Четверг</option>
+						  <option value="5">Пятница</option>
+						  <option value="6">Суббота</option>
+						  <option value="0">Воскресенье</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="inputNum">№ пары</label>
+						<select name="num-par" class="form-control" id="inputNum">
+						  <option>1</option>
+						  <option>2</option>
+						  <option>3</option>
+						  <option>4</option>
+						  <option>5</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="inputName">Название пары</label>
+					    <input name="name-par" type="text" class="form-control" id="inputName" placeholder="Название пары" required>
+					</div>
+					<div class="form-group">
+						<label for="inputType">Тип пары</label>
+					    <select name="type-par" class="form-control" id="inputType">
+						  <option>Лекция</option>
+						  <option>Практические занятия</option>
+						  <option>Лабораторная работа</option>
+						  <option>Консультация</option>
+						  <option>Экзамен</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="inputWeek">По каким неделям</label>
+					    <input name="week-par" type="text" class="form-control" id="inputWeek" placeholder="По каким неделям" required>
+					</div>
+					<div class="form-group">
+						<label for="inputPrepod">Преподаватель</label>
+					    <input name="prepod-par" type="text" class="form-control" id="inputPrepod" placeholder="Преподаватель" required>
+					</div>
+					<div class="form-group">
+						<label for="inputAyd">Аудитория</label>
+					    <input name="aud-par" type="text" class="form-control" id="inputAyd" placeholder="Аудитория" required>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="inputNum">№ пары</label>
-					<select name="num-par" class="form-control" id="inputNum">
-					  <option>1</option>
-					  <option>2</option>
-					  <option>3</option>
-					  <option>4</option>
-					  <option>5</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="inputName">Название пары</label>
-				    <input name="name-par" type="text" class="form-control" id="inputName" placeholder="Название пары" required>
-				</div>
-				<div class="form-group">
-					<label for="inputType">Тип пары</label>
-				    <select name="type-par" class="form-control" id="inputType">
-					  <option>Лекция</option>
-					  <option>Практические занятия</option>
-					  <option>Лабораторная работа</option>
-					  <option>Консультация</option>
-					  <option>Экзамен</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="inputWeek">По каким неделям</label>
-				    <input name="week-par" type="text" class="form-control" id="inputWeek" placeholder="По каким неделям" required>
-				</div>
-				<div class="form-group">
-					<label for="inputPrepod">Преподаватель</label>
-				    <input name="prepod-par" type="text" class="form-control" id="inputPrepod" placeholder="Преподаватель" required>
-				</div>
-				<div class="form-group">
-					<label for="inputAyd">Аудитория</label>
-				    <input name="aud-par" type="text" class="form-control" id="inputAyd" placeholder="Аудитория" required>
-				</div>
-				<button type="submit" class="btn btn-default">Добавить</button>
-			</form>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-default">Добавить</button>
+		    		<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+		      	</div>
+			  </form>
+		    </div>  
+		  </div>  
 		</div>
 		<?php
 		}
-		} //------------------------------Добавление пары
-		elseif($_GET['page'] == 'allow-edit-par'){ //------------------------------------------------------------
+		//} //------------------------------Добавление пары
+		if($_GET['page'] == 'allow-edit-par'){ //------------------------------------------------------------
 		?>
 		<div class="panel panel-body">
 			<form class="form-horizontal" role="form" name="add-pin" method="post" action="/?page=allow-edit-par">

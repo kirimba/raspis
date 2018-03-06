@@ -213,13 +213,13 @@ title="HotLog" alt="HotLog"></a>
 				<div class="form-group">
 					<label for="inputDay">День недели</label>
 					<select name="day-par" class="form-control" id="inputDay">
-					  <option>1</option>
-					  <option>2</option>
-					  <option>3</option>
-					  <option>4</option>
-					  <option>5</option>
-					  <option>6</option>
-					  <option>0</option>
+					  <option value="1">Понедельник</option>
+					  <option value="2">Вторник</option>
+					  <option value="3">Среда</option>
+					  <option value="4">Четверг</option>
+					  <option value="5">Пятница</option>
+					  <option value="6">Суббота</option>
+					  <option value="0">Воскресенье</option>
 					</select>
 				</div>
 				<div class="form-group">

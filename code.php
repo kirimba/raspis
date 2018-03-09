@@ -87,9 +87,9 @@ if($_GET['page'] == 'add-grup'){
 			$data_start1 = explode('-', $data_start);
 			$data_start = mktime(0,0,0,$data_start1['1'],$data_start1['2'], $data_start1['0']);
 			if($mysqli->query("INSERT INTO `grups` (`name`, `start`, `pin`) VALUES ('$name_grup', '$data_start', '$pin_grup')"))
-			$alert = '<div class="alert alert-success">Группа добавлена</div>';
+			$alert = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Группа добавлена</div>';
 			else
-			$alert = '<div class="alert alert-danger">Ошибка добавления</div>';
+			$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка добавления</div>';
 		}
 }//-------------------------Добаление группы
 elseif($_GET['page'] == 'add-par-bonch'){//Добавление группы и пар из Бонч
@@ -105,7 +105,8 @@ elseif($_GET['page'] == 'add-par-bonch'){//Добавление группы и 
 			if($_FILES['file-grup']['error'] != 1 && $_FILES['file-grup']['error'] != 0)
 			{
 			  $error = $_FILES['file-grup']['error'];
-			  $alert = '<div class="alert alert-danger">Ошибка: Файл не загружен. Код ошибки: '.$error.'</div>';
+			  //$alert = '<div class="alert alert-danger">Ошибка: Файл не загружен. Код ошибки: '.$error.'</div>';
+			  $alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка: Файл не загружен.</div>';
 			}
 			else
 		    {
@@ -117,7 +118,7 @@ elseif($_GET['page'] == 'add-par-bonch'){//Добавление группы и 
 			  {
 			   	//$filesize = ($filesize != 0)? sprintf('(%.2f Кб)' , $filesize / 1024): '';
 			   	//$alert = '<div class="alert alert-danger">Ошибка: Размер прикреплённого файла '. $filesize.' больше допустимого (3 Мб).</div>';
-			   	$alert = '<div class="alert alert-danger">Ошибка: Размер прикреплённого файла не соответствует ожиданию.</div>';
+			   	$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка: Размер прикреплённого файла не соответствует ожиданию.</div>';
 			  }
 			  else
 			  {
@@ -141,23 +142,23 @@ elseif($_GET['page'] == 'add-par-bonch'){//Добавление группы и 
 							$data_start1 = explode('-', $data_start);
 							$data_start = mktime(0,0,0,$data_start1['1'],$data_start1['2'], $data_start1['0']);
 							if($mysqli->query("INSERT INTO `grups` (`name`, `start`, `pin`) VALUES ('$name_grup', '$data_start', '$pin_grup')")){
-								$alert = '<div class="alert alert-success">Группа добавлена</div>';
+								$alert = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Группа добавлена</div>';
 								$id_grup = (string)$mysqli->insert_id;
 								require("upload_raspis.php");
 							}else
-							$alert = '<div class="alert alert-danger">Ошибка добавления</div>';
+							$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка добавления</div>';
 						}
 					}
 					
 				}else{
-					$alert = $alert.'<div class="alert alert-danger">Ошибка: Что ты тут загружаешь?</div>';
+					$alert = $alert.'<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка: Что ты тут загружаешь?</div>';
 				}
 			  }
 			}
 		  }
 		}
 	}else{
-		$alert = '<div class="alert alert-danger">Ошибка</div>';
+		$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка</div>';
 	}
 }//----------------Добавление группы и пар из Бонч
 else{
@@ -179,7 +180,7 @@ else{
 		//$day_num = 2;
 		
 		if(isset($pin) and ($_COOKIE['pin'.$id_grup] == $pin)){
-			if(isset($_POST['name-par'], $_POST['type-par'], $_POST['num-par'], $_POST['day-par'], $_POST['aud-par'], $_POST['week-par'], $_POST['prepod-par1']))
+			if(isset($_POST['name-par'], $_POST['type-par'], $_POST['num-par'], $_POST['day-par'], $_POST['aud-par'], $_POST['week-par'], $_POST['prepod-par1'], $_POST['time-par1'], $_POST['time-par2']))
 			{
 			$name_par = htmlspecialchars($_POST['name-par']);
 			$type_par = htmlspecialchars($_POST['type-par']);
@@ -194,12 +195,11 @@ else{
 			$time_par = '('.$time_par1.'-'.$time_par2.')';
 			$prepod_par = '<span title="'.$prepod_par2.'"><i>'.$prepod_par1.'</i></span>';
 			if($mysqli->query("INSERT INTO `raspis` (`id_grup`, `time`, `para`, `den`, `name`, `type`, `weeks`, `auditor`, `prepod`) VALUES ('$id_grup', '$time_par', '$num_par', '$day_par', '$name_par', '$type_par', '$week_par', '$aud_par', '$prepod_par')"))
-			$alert2 = '<div class="alert alert-success">Пара добавлена</div>';
+			$alert2 = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Пара добавлена</div>';
 			else
-			$alert2 = '<div class="alert alert-danger">Ошибка добавления</div>';
+			$alert2 = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка добавления</div>';
 			}
-		}else
-			$alert2 = '<div class="alert alert-danger">Вам не доступно редактирование этой группы</div>';
+		}
 		
 		if($_GET['page'] == 'add-par'){} //------------------------------Добавление пары
 		elseif($_GET['page'] == 'allow-edit-par'){}
@@ -237,17 +237,17 @@ else{
     					$num_par = 0;
     					}
     			}else{
-    				$alert2 = '<div class="alert alert-danger">Ошибка запроса расписания</div>';
+    				$alert2 = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка запроса расписания</div>';
     				$error2 = FALSE;
     				}
     } //--------------------------------------------------------Основной вывод
 		
 		}else{
-    	$alert = '<div class="alert alert-danger">Возможно ваша группа была удалена выберите из списка: <a href="/?p" class="alert-link">Выбрать</a></div>';
+    	$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Возможно ваша группа была удалена выберите из списка: <a href="/?p" class="alert-link">Выбрать</a></div>';
     	$error1 = FALSE;
     	}
     }else{
-    	$alert = '<div class="alert alert-danger">Ошибка запроса группы</div>';
+    	$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка запроса группы</div>';
     	$error1 = FALSE;
     	}
 	}

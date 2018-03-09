@@ -12,22 +12,10 @@ require("code.php");
     <title>Расписание</title>
     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
     <!-- Bootstrap -->
+    <link href="css/jtsage-datebox.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	<style>
-		.btop{
-			border-top: 2px solid #000000;
-		}
-		.bleft{
-			border-left: 2px solid #000000;
-		}
-		.bright{
-			border-right: 2px solid #000000;
-		}
-		.bbottom{
-			border-bottom: 2px solid #000000;
-		}
-	</style>
+    <link href="css/new.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -220,13 +208,25 @@ title="HotLog" alt="HotLog"></a>
 		      <form role="form" name="add-para" method="post" action="/">
 		      <!--<form role="form" name="add-para" method="post" action="/?page=add-par">-->
 		      	<div class="modal-body">
-		      		<div class="form-group">
+		      		<div class="form-group" id="time_input_mob">
 			      		<label for="inputTime">Время</label>
 			      		<div class="input-group">
 							<span class="input-group-addon">с</span>
 							<input type="time" name="time-par1" class="form-control" id="inputTime" required>
 							<span class="input-group-addon">по</span>
 							<input type="time" name="time-par2" class="form-control" id="inputTime1" required>
+						</div>
+					</div>
+
+					<div class="form-group" id="time_input_pc">
+						<label for="inputTime0">Время</label>
+						<label class="time_label" for="inputTime">Начало пары</label>
+						<label class="time_label" for="inputTime1">Конец пары</label>
+			      		<div class="input-group">
+							<span class="input-group-addon">с</span>
+							<input type="time" name="time-par1" data-role="datebox" class="form-control" id="inputTime" data-options='{"mode":"timeflipbox", "overrideTimeOutput":"%H:%M", "useFocus":true, "useButton":false, "useCancelButton":true, "useCollapsedBut":true}' required>
+							<span class="input-group-addon">по</span>
+							<input type="time" name="time-par2" data-role="datebox" class="form-control" id="inputTime1" data-options='{"mode":"timeflipbox", "overrideTimeOutput":"%H:%M", "useFocus":true, "useButton":false, "useCancelButton":true, "useCollapsedBut":true}' required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -281,7 +281,7 @@ title="HotLog" alt="HotLog"></a>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-						    <input name="prepod-par2" type="text" class="form-control" id="inputPrepod1" placeholder="Иванов Иван Иванович" required>
+						    <input name="prepod-par2" type="text" class="form-control" id="inputPrepod1" placeholder="Иванов Иван Иванович">
 						    <span class="input-group-addon">Полностью</span>
 						</div>
 					</div>
@@ -475,13 +475,26 @@ title="HotLog" alt="HotLog"></a>
     </div><!-- /.container --> 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/jquery-ui-1.12.1.min.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/jtsage-datebox.min.js"></script>
+    <script src="js/jtsage-datebox.i18n.ru.utf8.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+
 	$(document).ready(function(){
 	    $('[data-toggle="tooltip"]').tooltip();
+	    if($(window).width()>767){
+			$('#time_input_mob').empty();
+		}else{
+			$('#time_input_pc').empty();
+		}
+		setTimeout(function(){
+			$('.alert-success').alert('close');
+		},5000);
 	});
-	
+
 	window.onload = function(){
 		var list1 = document.getElementsByClassName("time_para");
 		var list2 = [];

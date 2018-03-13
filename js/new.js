@@ -1,4 +1,16 @@
 
+if($.cookie('timeedit') && $.cookie('timeedit')!="null"){
+	var timeedit = parseInt($.cookie('timeedit'));
+	$.cookie('timeedit', timeedit, {
+			    expires: 30,
+			    path: '/',
+			});
+}
+else
+	var timeedit = 0;
+
+console.log(timeedit);
+
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 	if($(window).width()>767){
@@ -9,7 +21,20 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$('.alert-success').alert('close');
 	},5000);
+	$('#timeedit').click(timeed);
 });
+
+function timeed(){
+		timeedit = parseInt($('#inputTimeedit').val());
+		console.log(timeedit);
+		if(timeedit == 0)
+			$.cookie('timeedit', null);
+		else
+			$.cookie('timeedit', timeedit, {
+			    expires: 30,
+			    path: '/',
+			});
+	}
 
 window.onload = function(){
 	var list1 = document.getElementsByClassName("time_para");
@@ -37,7 +62,7 @@ var simb = lin.substr(lin.length-2,2);
 
 window.setInterval(function(){
 	var date = new Date();
-	date.setUTCHours(date.getUTCHours()+3);
+	date.setUTCHours(date.getUTCHours()+3+timeedit);
 	var hours = date.getUTCHours();
 	var minutes = date.getMinutes();
 	var seconds = date.getSeconds();

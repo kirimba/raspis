@@ -157,7 +157,12 @@ if($_SESSION['mast']){//Добавление группы и пар из Бон�
 	}
 }//----------------Добавление группы и пар из Бонч
 
+$active_day=false;
+$active_week=false;    //активные кнопки меню
+$active_vibor=true;
+
 if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор группы
+	$active_vibor=false;
 	$id_grup = htmlspecialchars($_COOKIE['id']);
 	if($rez = $mysqli->query("SELECT * FROM grups WHERE id_grup = $id_grup LIMIT 1")){
 		if(($rez->num_rows) == 1){
@@ -197,6 +202,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 			}//------------------------------Добавление пары
 
 			if($_GET['page'] == 'week'){
+				$active_week=true;
 				if(isset($_GET['num']))
 					$week_all = htmlspecialchars($_GET['num']);
 				else
@@ -232,6 +238,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				$rez->free();
 			}
 			else{
+				$active_day=true;
 				if(isset($_GET['day'])){
 					$day_11 = htmlspecialchars($_GET['day']);
 					$week_new = (int)((date('z',(strtotime('+'.$day_11.' day')+60*60*3)) - date('z',$start_grup))/7)+1;

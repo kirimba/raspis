@@ -1,8 +1,8 @@
 <?php
 $cfg = array(
-	'db_host' 			=> '', //Хост.
-	'db_name'			=> '', //Имя.
-	'db_user' 			=> '', //Имя юзера.
+	'db_host' 			=> 'localhost', //Хост.
+	'db_name'			=> 'rasp', //Имя.
+	'db_user' 			=> 'root', //Имя юзера.
 	'db_pass' 			=> '', //Пароль.
 );
 $maspar = "!1r2e3w4q!";

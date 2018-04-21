@@ -164,6 +164,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 			while($result = $rez->fetch_assoc()){
 				$name_grup = $result['name'];
 				$start_grup = $result['start'];
+				$last_update_raspis = $result['last-apdata'];
 				$time_start_par = explode(" ", $result['time-start-par']);
 				$pin = $result['pin'];
 			}
@@ -195,7 +196,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				}
 			}//------------------------------Добавление пары
 
-			if($_GET['page'] == 'all-par'){
+			if($_GET['page'] == 'week'){
 				if(isset($_GET['num']))
 					$week_all = htmlspecialchars($_GET['num']);
 				else

@@ -14,7 +14,7 @@ require("code.php");
     <link href="css/jtsage-datebox.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/new.css" rel="stylesheet">
+    <link href="css/new.css?ver=1" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,7 +36,7 @@ require("code.php");
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/?p">Выбрать группу</a></li>
-            <li><a href="/?page=all-par">На всю неделю</a></li>
+            <li><a href="/?page=week">На всю неделю</a></li>
             <li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Еще <b class="caret"></b></a>
           		<ul class="dropdown-menu">
@@ -58,7 +58,14 @@ require("code.php");
             		if($_SESSION['mast']){
             			echo '<li class="divider"></li>
             			<li><a href="#" data-toggle="modal" data-target="#add_par_bonch_modal">Добавление пар Бонч</a></li>';
-            		}?>
+            		}
+            		if(isset($last_update_raspis)){
+            			echo '<li class="divider"></li>';
+            			echo '<li><p class="navbar-te">Последнее обновление ';
+            			echo $last_update_raspis;
+            			echo '</p></li>';
+            		}
+            		?>
           		</ul>
         	</li>
           </ul>
@@ -128,7 +135,7 @@ require("code.php");
 				if(isset($alert2))
 				echo $alert2;
 
-				if($_GET['page'] == 'all-par'){
+				if($_GET['page'] == 'week'){
 					?>
 					<div class="panel panel-info text-center">
 						<div class="panel-heading">
@@ -136,8 +143,8 @@ require("code.php");
 						</div>
 					</div>
 					<ul class="pager">
-			  			<li class="previous"><a href="/?page=all-par&num=<?=$week_all-1?>">&larr; Предыдущая</a></li>
-			  			<li class="next"><a href="/?page=all-par&num=<?=$week_all+1?>">Следующая &rarr;</a></li>
+			  			<li class="previous"><a href="/?page=week&num=<?=$week_all-1?>">&larr; Предыдущая</a></li>
+			  			<li class="next"><a href="/?page=week&num=<?=$week_all+1?>">Следующая &rarr;</a></li>
 					</ul><!--Вывод расписания на всю неделю-->
 					
 					<?php
@@ -247,7 +254,7 @@ require("code.php");
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.cookie.js"></script>
 	<script src="js/new.js"></script>
-	<?=include("modals.php");?>
+	<?php include("modals.php"); ?>
   </body>
 </html>
 <?php

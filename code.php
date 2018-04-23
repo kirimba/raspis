@@ -201,7 +201,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				}
 			}//------------------------------Добавление пары
 
-			if($_GET['page'] == 'week'){
+			if($_GET['page'] == 'week'){//на неделю
 				$active_week=true;
 				if(isset($_GET['num']))
 					$week_all = htmlspecialchars($_GET['num']);
@@ -209,6 +209,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 					$week_all = $week;
 				for($i=1; $i<=6; $i++)
 					$num_par[$i]=0;
+
 
 				if($rez = $mysqli->query("SELECT * FROM raspis WHERE id_grup = $id_grup ORDER BY `para` ASC")){
 					if(($rez->num_rows)>0){
@@ -237,19 +238,20 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				}
 				$rez->free();
 			}
-			else{
+			else{//на день
 				$active_day=true;
 				if(isset($_GET['day'])){
 					$day_11 = htmlspecialchars($_GET['day']);
-					$week_new = (int)((date('z',(strtotime('+'.$day_11.' day')+60*60*3)) - date('z',$start_grup))/7)+1;
-					$day_num_new = date('w',(strtotime('+'.$day_11.' day')+60*60*3));
-					$data_11 = date("d.m",(strtotime('+'.$day_11.' day')+60*60*3));
+					$week_new = (int)((date('z',$day_11) - date('z',$start_grup))/7)+1;
+					$day_num_new = date('w',$day_11);
+					$data_11 = date("d.m",$day_11);
 				}else{
-					$day_11 = 0;
+					$day_11 = strtotime('+ 3 hour');
 					$week_new = $week;
 					$day_num_new = $day_num;
 				}
-
+				$day_next = strtotime('+ 1 day',$day_11);
+				$day_prev = strtotime('- 1 day',$day_11);
 				if($rez = $mysqli->query("SELECT * FROM raspis WHERE id_grup = $id_grup AND den = $day_num_new ORDER BY `para` ASC")){
 					if(($rez->num_rows)>0){
 						$num_par = 0;

@@ -36,6 +36,14 @@ function timeed(){
 			});
 	}
 
+function serch_day(){
+	new_day = $('#inputSerchDay').val();
+	var new_date = new Date(new_day);
+	var new_date1 = new_date.getTime()/1000;
+	console.log(new_day);
+	document.location.replace("?day="+new_date1);
+}
+
 window.onload = function(){
 	var list1 = document.getElementsByClassName("time_para");
 	var list2 = [];

@@ -71,6 +71,14 @@ require("code.php");
         	</li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+          	<li>
+          	   <div class="navbar-form" role="search">
+			  	<div class="form-group">
+			    	<input type="date" id="inputSerchDay" class="form-control" placeholder="Поиск" required>
+			  	</div>
+			  	<button type="submit" onclick="serch_day()" class="btn btn-default">Поиск</button>
+			  </div>
+          	</li>
         	<li>
         		<a style="padding-top: 10px; padding-bottom: 10px" href="#"><!-- HotLog -->
 					<span id="hotlog_counter"></span>
@@ -192,7 +200,7 @@ require("code.php");
 					}//---------------------------Вывод всей недели
 				}else{
 					if(isset($_GET['day'])){
-						if(htmlspecialchars($_GET['day']) != 0){
+						if(!(($week_new == $week) && ($day_num_new == $day_num))){
 						?>
 						<div class="alert alert-info">
 							<div class="row text-center">
@@ -206,8 +214,8 @@ require("code.php");
 					}
 					?>
 					<ul class="pager"><!--Переключение дней-->
-						<li class="previous"><a href="/?day=<?=$day_11-1?>">&larr; Предыдущий</a></li>
-						<li class="next"><a href="/?day=<?=$day_11+1?>">Следующий &rarr;</a></li>
+						<li class="previous"><a href="/?day=<?=$day_prev?>">&larr; Предыдущий</a></li>
+						<li class="next"><a href="/?day=<?=$day_next?>">Следующий &rarr;</a></li>
 					</ul><!--Переключение дней-->
 					
 					<div class="row"><!--Основной вывод расписания-->
@@ -254,7 +262,7 @@ require("code.php");
 	<script src="js/jtsage-datebox.i18n.ru.utf8.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.cookie.js"></script>
-	<script src="js/new.js"></script>
+	<script src="js/new.js?ver=1"></script>
 	<?php include("modals.php"); ?>
   </body>
 </html>

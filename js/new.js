@@ -37,11 +37,18 @@ function timeed(){
 	}
 
 function serch_day(){
-	new_day = $('#inputSerchDay').val();
-	var new_date = new Date(new_day);
-	var new_date1 = new_date.getTime()/1000;
-	console.log(new_day);
-	document.location.replace("?day="+new_date1);
+	new_day = $('#inputSerchDay');
+	if(new_day.val().length>0){
+		var new_date = new Date(new_day.val());
+		var new_date1 = new_date.getTime()/1000;
+		console.log(new_day);
+		document.location.replace("?day="+new_date1);
+	}else{
+		$('#inputSerchDayform').toggleClass('has-error');
+		setTimeout(function(){
+			$('#inputSerchDayform').toggleClass('has-error');
+		}, 5000)
+	}
 }
 
 window.onload = function(){

@@ -203,7 +203,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 
 			if($_GET['page'] == 'week'){//на неделю
 				$active_week=true;
-				if(isset($_GET['num']))
+				if(isset($_GET['num']) && is_numeric(htmlspecialchars($_GET['num'])))
 					$week_all = htmlspecialchars($_GET['num']);
 				else
 					$week_all = $week;
@@ -240,7 +240,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 			}
 			else{//на день
 				$active_day=true;
-				if(isset($_GET['day'])){
+				if(isset($_GET['day']) && is_numeric(htmlspecialchars($_GET['day']))){
 					$day_11 = htmlspecialchars($_GET['day']);
 					$week_new = (int)((date('z',$day_11) - date('z',$start_grup))/7)+1;
 					$day_num_new = date('w',$day_11);

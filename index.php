@@ -72,12 +72,12 @@ require("code.php");
           </ul>
           <ul class="nav navbar-nav navbar-right">
           	<li>
-          	   <div class="navbar-form" role="search">
-			  	<div class="form-group">
-			    	<input type="date" id="inputSerchDay" class="form-control" placeholder="Поиск" required>
-			  	</div>
-			  	<button type="submit" onclick="serch_day()" class="btn btn-default">Поиск</button>
-			  </div>
+          	  <div id="inputSerchDayform" class="navbar-form" role="search">
+								<div class="form-group">
+									<input type="date" id="inputSerchDay" class="form-control" placeholder="Поиск">
+								</div>
+								<button type="submit" onclick="serch_day()" class="btn btn-default">Поиск</button>
+							</div>
           	</li>
         	<li>
         		<a style="padding-top: 10px; padding-bottom: 10px" href="#"><!-- HotLog -->
@@ -253,17 +253,17 @@ require("code.php");
     }
     ?>
     </div><!-- /.container -->
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/jquery-ui-1.12.1.min.js"></script>
-	<script src="js/jquery.mousewheel.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/jtsage-datebox.min.js"></script>
-	<script src="js/jtsage-datebox.i18n.ru.utf8.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.cookie.js"></script>
-	<script src="js/new.js?ver=1"></script>
-	<?php include("modals.php"); ?>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script src="js/jquery-ui-1.12.1.min.js"></script>
+		<script src="js/jquery.mousewheel.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/jtsage-datebox.min.js"></script>
+		<script src="js/jtsage-datebox.i18n.ru.utf8.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+		<script src="js/new.js?ver=2"></script>
+		<?php include("modals.php"); ?>
   </body>
 </html>
 <?php

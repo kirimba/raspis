@@ -14,7 +14,8 @@ require("code.php");
     <link href="css/jtsage-datebox.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/new.css?ver=1" rel="stylesheet">
+    <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link href="css/new.css?ver=2" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,11 +26,14 @@ require("code.php");
   <body>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
-          	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+          </button>
+          <button id="inputSerchDay2" type="button" style="padding:7px 14px 5px 14px;" class="navbar-toggle">
+          	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
           </button>
           <a class="navbar-brand" href="/">Расписание <?=$name_grup?></a>
         </div>
@@ -260,9 +264,11 @@ require("code.php");
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/jtsage-datebox.min.js"></script>
 		<script src="js/jtsage-datebox.i18n.ru.utf8.min.js"></script>
+		<script src="js/bootstrap-datepicker.js"></script>
+		<script src="js/bootstrap-datepicker.ru.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.cookie.js"></script>
-		<script src="js/new.js?ver=2"></script>
+		<script src="js/new.js?ver=4"></script>
 		<?php include("modals.php"); ?>
   </body>
 </html>

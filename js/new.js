@@ -51,6 +51,29 @@ function serch_day(){
 	}
 }
 
+$('#inputSerchDay').datepicker({
+	format: "yyyy-mm-dd",
+	todayHighlight: true,
+	clearBtn: true,
+	language: "ru",
+	ntop: 70,
+	autoclose: true,
+	toggleActive: true
+});
+$('#inputSerchDay2').datepicker({
+	todayHighlight: true,
+	language: "ru",
+	ntop: 70,
+	autoclose: true
+});
+$('#inputSerchDay2').on('changeDate', function() {
+	var new_dat = $(this).datepicker('getUTCDate');
+	var new_dat1 = new_dat.getTime()/1000;
+	console.log(new_dat);
+	document.location.replace("?day="+new_dat1);
+	
+});
+
 window.onload = function(){
 	var list1 = document.getElementsByClassName("time_para");
 	var list2 = [];

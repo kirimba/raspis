@@ -58,13 +58,15 @@ $('#inputSerchDay').datepicker({
 	language: "ru",
 	ntop: 70,
 	autoclose: true,
-	toggleActive: true
+	toggleActive: true,
+	defaultViewDate: dann()
 });
 $('#inputSerchDay2').datepicker({
 	todayHighlight: true,
 	language: "ru",
 	ntop: 70,
-	autoclose: true
+	autoclose: true,
+	defaultViewDate: dann()
 });
 $('#inputSerchDay2').on('changeDate', function() {
 	var new_dat = $(this).datepicker('getUTCDate');
@@ -73,6 +75,49 @@ $('#inputSerchDay2').on('changeDate', function() {
 	document.location.replace("?day="+new_dat1);
 	
 });
+
+function dann(){
+	var ear;
+	var man;
+	var dayy;
+	var getday = window.location.search;
+	var getres = new Object(); 
+	getday = (getday.substr(1)).split('&');
+	for (var i = 0; i < getday.length; i++) {
+		res = getday[i].split('=');
+		if((typeof res[0] !== "undefined") && (typeof res[1] !== "undefined")){
+			if(res[1].length>0){
+				getres[res[0]] = res[1];
+			}
+		}
+	}
+	if(typeof getres["day"] !== "undefined"){
+		if(!isNaN(parseFloat(getres["day"])) && isFinite(getres["day"])){
+			var datee = new Date(getres["day"]*1000);
+			ear = datee.getUTCFullYear();
+			man = datee.getUTCMonth();
+			dayy = datee.getUTCDate();
+			var resulte ={
+				year: ear,
+				month: man,
+				day: dayy 
+			}
+		}
+	}else{
+	console.log(22);
+	var datee = new Date();
+	ear = datee.getFullYear();
+	man = datee.getMonth();
+	dayy = datee.getDate();
+	var resulte ={
+		year: ear,
+		month: man,
+		day: dayy 
+	}
+	}
+	console.log(resulte);
+	return resulte;
+}
 
 window.onload = function(){
 	var list1 = document.getElementsByClassName("time_para");

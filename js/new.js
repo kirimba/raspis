@@ -10,6 +10,7 @@ else
 	var timeedit = 0;
 
 console.log(timeedit);
+var resultget = dann();
 
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
@@ -59,14 +60,28 @@ $('#inputSerchDay').datepicker({
 	ntop: 70,
 	autoclose: true,
 	toggleActive: true,
-	defaultViewDate: dann()
+	defaultViewDate: resultget,
+	beforeShowDay: function (date){
+                    if(date.getDate() == resultget["day"] && date.getMonth() == resultget["month"]){
+                        return {
+                          classes: 'acty'
+                        };
+                  	}
+                }
 });
 $('#inputSerchDay2').datepicker({
 	todayHighlight: true,
 	language: "ru",
 	ntop: 70,
 	autoclose: true,
-	defaultViewDate: dann()
+	defaultViewDate: resultget,
+	beforeShowDay: function (date){
+                    if(date.getDate() == resultget["day"] && date.getMonth() == resultget["month"]){
+                        return {
+                          classes: 'acty'
+                        };
+                  	}
+                }
 });
 $('#inputSerchDay2').on('changeDate', function() {
 	var new_dat = $(this).datepicker('getUTCDate');

@@ -57,3 +57,25 @@
 	margin-left: 0px;
 	margin-right: 0px;
 }
+.datepicker table tr td.acty {
+  color: #000;
+  background-color: #83c0f5;
+  border-color: #70b8f7;
+}
+.datepicker table tr td.acty:focus,
+.datepicker table tr td.acty.focus {
+  color: #000;
+  background-color: #61aef1;
+  border-color: #5389b7;
+}
+.datepicker table tr td.acty:hover {
+  color: #000;
+  background-color: #61aef1;
+  border-color: #60aff5;
+}
+.datepicker table tr td.acty:active,
+.datepicker table tr td.acty.active {
+  color: #000;
+  background-color: #61aef1;
+  border-color: #60aff5;
+}

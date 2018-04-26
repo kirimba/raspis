@@ -155,13 +155,11 @@ window.onload = function(){
 		list2[i] = list3;
 	}
 	}
-var lin = window.location.href;
-var simb = lin.substr(lin.length-2,2);
 
 window.setInterval(function(){
 	var date = new Date();
-	date.setUTCHours(date.getUTCHours()+3+timeedit);
-	var hours = date.getUTCHours();
+	date.setHours(date.getHours()+timeedit);
+	var hours = date.getHours();
 	var minutes = date.getMinutes();
 	var seconds = date.getSeconds();
 
@@ -169,7 +167,8 @@ window.setInterval(function(){
 		minutes = '0' + minutes;
 	if (seconds < 10) 
 		seconds = '0' + seconds;
-	if((simb=="f/")||(simb=="=0")){	
+	
+	if(date.getDate()==resultget["day"] && date.getMonth()==resultget["month"] && date.getFullYear()==resultget["year"]){	
 		if(list1[0]!=undefined){
 			for (var i = 0; i < list1.length; i++) {
 				var ii = i+1;

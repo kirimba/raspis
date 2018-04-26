@@ -249,6 +249,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 					$day_11 = strtotime('+ 3 hour');
 					$week_new = $week;
 					$day_num_new = $day_num;
+					$data_11 = date("d.m",$day_11);
 				}
 				$day_next = strtotime('+ 1 day',$day_11);
 				$day_prev = strtotime('- 1 day',$day_11);

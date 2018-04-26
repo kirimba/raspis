@@ -15,7 +15,7 @@ require("code.php");
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
-    <link href="css/new.css?ver=2" rel="stylesheet">
+    <link href="css/new.css?ver=3" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -203,19 +203,6 @@ require("code.php");
 						unset($list_par);
 					}//---------------------------Вывод всей недели
 				}else{
-					if(isset($_GET['day'])){
-						if(!(($week_new == $week) && ($day_num_new == $day_num))){
-						?>
-						<div class="alert alert-info">
-							<div class="row text-center">
-								<div class="col-md-4 col-xs-12"><h3 class="panel-title">Сейчас показана <b><?=$week_new?></b> неделя,</h3></div>
-								<div class="col-md-4 col-xs-6"><h3 class="panel-title"><b><?=day($day_num_new)?></b></h3></div>
-								<div class="col-md-3 col-xs-6"><h3 class="panel-title">Число: <b><?=$data_11?></b></h3></div>
-							</div>
-						</div>
-						<?php
-						}
-					}
 					?>
 					<ul class="pager"><!--Переключение дней-->
 						<li class="previous"><a href="/?day=<?=$day_prev?>">&larr; Предыдущий</a></li>
@@ -225,6 +212,10 @@ require("code.php");
 					<div class="row"><!--Основной вывод расписания-->
 						<div class="col-xs-12 col-md-4 col-md-offset-4">
 							<div style="background: " class="panel panel-default">
+								<div class="panel-heading">
+										<h3 class="panel-title" style="float: right;"><b><?=$week_new?></b> неделя</h3>
+						    		<h3 class="panel-title"><?=day($day_num_new)?> (<b><?=$data_11?></b>)</h3>
+						  	</div>
 								<table class="table table-bordered">
 									<thead>
 										<tr class="btop bleft bbottom bright">
@@ -268,7 +259,7 @@ require("code.php");
 		<script src="js/bootstrap-datepicker.ru.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.cookie.js"></script>
-		<script src="js/new.js?ver=4"></script>
+		<script src="js/new.js?ver=6"></script>
 		<?php include("modals.php"); ?>
   </body>
 </html>

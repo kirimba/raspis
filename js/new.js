@@ -37,6 +37,17 @@ function timeed(){
 			});
 	}
 
+function monthd(){
+	if($.cookie('month') == null)
+		$.cookie('month', 1, {
+		    expires: 30,
+		    path: '/',
+		});
+	else
+		$.cookie('month', null);
+	document.location.reload();
+}
+
 function serch_day(){
 	new_day = $('#inputSerchDay');
 	if(new_day.val().length>0){

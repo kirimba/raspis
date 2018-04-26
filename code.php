@@ -23,6 +23,16 @@ if(isset($_POST['pingrup'])){//-------------Пин группы в куки
 if(isset($_GET['p'])){//---------------------------Выбор группы
 	$vibr_grup = true;
 }//------------------------------------------------Выбор группы
+if(isset($_COOKIE['month'])){
+	if($_COOKIE['month'] == "null")
+		$montsb=false;
+	else{
+		$montsb=true;
+		setcookie( "month", 1, time()+(60*60*24*30), '/');
+	}
+}
+else
+	$montsb=false;
 
 function rus2translit($string) {//------функция транслита
     $converter = array(
@@ -78,6 +88,12 @@ function day($num111){//--------------------------День недели букв
 			    }
 	return $day111;
 }//------------------------------------------------День недели буквами
+
+$monthes = array(//--------------------------Месяц буквами
+1 => 'Января', 2 => 'Февраля', 3 => 'Марта', 4 => 'Апреля',
+5 => 'Мая', 6 => 'Июня', 7 => 'Июля', 8 => 'Августа',
+9 => 'Сентября', 10 => 'Октября', 11 => 'Ноября', 12 => 'Декабря'
+);//------------------------------------------------Месяц буквами
 
 if(isset($_POST['name-grup'], $_POST['data-tart-grup'], $_POST['pin-grup'])){ //----Добаление группы
 	$name_grup = htmlspecialchars($_POST['name-grup']);
@@ -228,6 +244,8 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 								}
 							}
 						}
+						$week_s_nach = (date('W',$start_grup)+$week_all-1)-date('W',strtotime('+ 3 hour'));
+						$week_s_nach1 =  strtotime("last Monday + ".$week_s_nach." week 3 hour");
     				}else{
     					for($i=1; $i<=6; $i++)
     						$list_par[$i][1] = '<tr class="bbottom bright bleft"><td colspan="3"><h2 class="text-center">Пар нет!</h2></td></tr>';

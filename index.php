@@ -50,6 +50,8 @@ require("code.php");
             		<li><a href="#" data-toggle="modal" data-target="#add_pin_modal">Доступ к редактированию</a></li>
             		<li class="divider"></li>
             		<li><a href="#" data-toggle="modal" data-target="#edit_time_modal">Редактировать время</a></li>
+            		<li class="divider"></li>
+            		<li><a href="#" onclick="monthd()" >Месяц цифрами <?php if($montsb) echo "ON"; else echo "OFF";?></a></li>
             		<?php
             		if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
             		echo '<li class="divider"></li>
@@ -150,11 +152,6 @@ require("code.php");
 
 				if($_GET['page'] == 'week'){
 					?>
-					<div class="panel panel-info text-center">
-						<div class="panel-heading">
-							<h3 class="panel-title">Сейчас показана <b><?=$week_all?></b> неделя.</h3>
-						</div>
-					</div>
 					<ul class="pager">
 			  			<li class="previous"><a href="/?page=week&num=<?=$week_all-1?>">&larr; Предыдущая</a></li>
 			  			<li class="next"><a href="/?page=week&num=<?=$week_all+1?>">Следующая &rarr;</a></li>
@@ -172,8 +169,15 @@ require("code.php");
 						<div class="col-md-4 col-xs-12" >
 							<div <?=$co?> class="panel panel-default">
 								<div class="panel-heading">
-						    		<h3 class="panel-title"><?=day($num_day)?></h3>
-						  		</div>
+									<h3 class="panel-title" style="float: right;"><b><?=$week_all?></b> неделя</h3>
+									<h3 class="panel-title"><?=day($num_day)?> (<b>
+										<?php
+										if($montsb)
+											echo date("d.m", strtotime("+ ".($num_day-1)." day", $week_s_nach1));
+										else
+											echo date("d ".$monthes[date("n", strtotime("+ ".($num_day-1)." day", $week_s_nach1))], strtotime("+ ".($num_day-1)." day", $week_s_nach1));
+										?></b>)</h3>
+								</div>
 								<table class="table table-bordered">
 									<thead>
 										<tr class="btop bleft bbottom bright">
@@ -214,7 +218,12 @@ require("code.php");
 							<div style="background: " class="panel panel-default">
 								<div class="panel-heading">
 										<h3 class="panel-title" style="float: right;"><b><?=$week_new?></b> неделя</h3>
-						    		<h3 class="panel-title"><?=day($day_num_new)?> (<b><?=$data_11?></b>)</h3>
+						    		<h3 class="panel-title"><?=day($day_num_new)?> (<b><?php
+										if($montsb)
+											echo $data_11;
+										else
+											echo date("d ".$monthes[date("n", $day_11)], $day_11);
+										?></b>)</h3>
 						  	</div>
 								<table class="table table-bordered">
 									<thead>

@@ -1,3 +1,10 @@
+
+					<div class="panel panel-info text-center">
+						<div class="panel-heading">
+							<h3 class="panel-title">Сейчас показана <b><?=$teste?></b> неделя.</h3>
+						</div>
+					</div>
+
 if(isset($_GET['day'])){
 						if(!(($week_new == $week) && ($day_num_new == $day_num))){
 						?>

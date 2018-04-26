@@ -15,7 +15,7 @@ require("code.php");
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
-    <link href="css/new.css?ver=3" rel="stylesheet">
+    <link href="css/new.css?ver=4" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,6 +42,7 @@ require("code.php");
             <li<?php if($active_vibor)echo' class="active"'?>><a href="/?p">Выбрать группу</a></li>
             <li<?php if($active_day)echo' class="active"'?>><a href="/">На день</a></li>
             <li<?php if($active_week)echo' class="active"'?>><a href="/?page=week">На всю неделю</a></li>
+            <li id="hide_mob"><a href="#" onclick="monthd()" >Месяц цифрами <?php if($montsb) echo "ON"; else echo "OFF";?></a></li>
             <li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Еще <b class="caret"></b></a>
           		<ul class="dropdown-menu">
@@ -50,8 +51,8 @@ require("code.php");
             		<li><a href="#" data-toggle="modal" data-target="#add_pin_modal">Доступ к редактированию</a></li>
             		<li class="divider"></li>
             		<li><a href="#" data-toggle="modal" data-target="#edit_time_modal">Редактировать время</a></li>
-            		<li class="divider"></li>
-            		<li><a href="#" onclick="monthd()" >Месяц цифрами <?php if($montsb) echo "ON"; else echo "OFF";?></a></li>
+            		<li id="hide_pc" class="divider"></li>
+            		<li id="hide_pc"><a href="#" onclick="monthd()" >Месяц цифрами <?php if($montsb) echo "ON"; else echo "OFF";?></a></li>
             		<?php
             		if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
             		echo '<li class="divider"></li>
@@ -268,7 +269,7 @@ require("code.php");
 		<script src="js/bootstrap-datepicker.ru.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.cookie.js"></script>
-		<script src="js/new.js?ver=6"></script>
+		<script src="js/new.js?ver=7"></script>
 		<?php include("modals.php"); ?>
   </body>
 </html>

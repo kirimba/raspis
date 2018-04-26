@@ -38,7 +38,7 @@ function timeed(){
 	}
 
 function monthd(){
-	if($.cookie('month') == null)
+	if($.cookie('month') == null || $.cookie('month') == "null")
 		$.cookie('month', 1, {
 		    expires: 30,
 		    path: '/',

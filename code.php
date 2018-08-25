@@ -119,8 +119,8 @@ if($_SESSION['mast']){//Добавление группы и пар из Бон�
 		if($_FILES['file-grup']['error'] != 1 && $_FILES['file-grup']['error'] != 0)
 		{
 		  $error = $_FILES['file-grup']['error'];
-		  //$alert = '<div class="alert alert-danger">Ошибка: Файл не загружен. Код ошибки: '.$error.'</div>';
-		  $alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка: Файл не загружен.</div>';
+		  //$alert = $alert.'<div class="alert alert-danger">Ошибка: Файл не загружен. Код ошибки: '.$error.'</div>';
+		  $alert = $alert.'<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка: Файл не загружен.</div>';
 		}
 		else
 	    {
@@ -132,7 +132,7 @@ if($_SESSION['mast']){//Добавление группы и пар из Бон�
 		  {
 		   	//$filesize = ($filesize != 0)? sprintf('(%.2f Кб)' , $filesize / 1024): '';
 		   	//$alert = '<div class="alert alert-danger">Ошибка: Размер прикреплённого файла '. $filesize.' больше допустимого (3 Мб).</div>';
-		   	$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка: Размер прикреплённого файла не соответствует ожиданию.</div>';
+		   	$alert = $alert.'<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка: Размер прикреплённого файла не соответствует ожиданию.</div>';
 		  }
 		  else
 		  {
@@ -145,22 +145,24 @@ if($_SESSION['mast']){//Добавление группы и пар из Бон�
 					if(!($pos === FALSE)){
 						$pos = stristr($stro, '<tr>');
 						$pos = substr($pos, 0, strpos($pos, '</tbody>'));
-						$pos = iconv("cp1251", "utf-8", $pos);
+						if(mb_detect_encoding($pos) != "UTF-8"){
+							$alert = $alert.'<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Не UTF-8 - преобразуем.</div>';
+							$pos = iconv(mb_detect_encoding($pos), "UTF-8", $pos);
+						}
 						$name_grup = htmlspecialchars($_POST['name-grup']);
 						$gruptra = rus2translit($name_grup);
-						//$alert = '<table  border="1"><tbody>'.$pos.'</tbody></table>';
+						//$alert = $alert.'<table  border="1"><tbody>'.$pos.'</tbody></table>';
 						file_put_contents('raspisanie/'.$gruptra.' '.$data11.'.txt', $pos);
-						
 						$data_start = htmlspecialchars($_POST['data-tart-grup']);
 						$pin_grup = (int)htmlspecialchars($_POST['pin-grup']);
 						$data_start1 = explode('-', $data_start);
 						$data_start = mktime(0,0,0,$data_start1['1'],$data_start1['2'], $data_start1['0']);
 						if($mysqli->query("INSERT INTO `grups` (`name`, `start`, `pin`) VALUES ('$name_grup', '$data_start', '$pin_grup')")){
-							$alert = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Группа добавлена</div>';
+							$alert = $alert.'<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Группа добавлена</div>';
 							$id_grup = (string)$mysqli->insert_id;
 							require("upload_raspis.php");
 						}else
-						$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка добавления</div>';
+						$alert = $alert.'<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка добавления</div>';
 					}
 				}
 				

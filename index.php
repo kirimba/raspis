@@ -23,7 +23,7 @@ require("code.php");
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body style="height: 100%;">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -106,7 +106,7 @@ require("code.php");
           </ul>
         </div><!--/.nav-collapse -->
     </div><!--Строка меню-->
-    <div style="margin-top: 70px;" class="container">
+    <div style="margin-top: 70px; height: 100%;" class="container">
 	<?php
 	if(isset($alert))
 			echo $alert;

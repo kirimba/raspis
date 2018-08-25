@@ -18,7 +18,7 @@ if($_SESSION['mast']){
 				</div>
 				<div class="form-group">
 				    <label for="inputFile">Загрузить фаил расписания</label>
-				    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+				    <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
 				    <input name="file-grup" type="file" id="inputFile" required>
 				</div>
 				<div class="form-group">

@@ -18,7 +18,7 @@ if($_SESSION['mast']){
 				</div>
 				<div class="form-group">
 				    <label for="inputFile">Загрузить фаил расписания</label>
-				    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+				    <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
 				    <input name="file-grup" type="file" id="inputFile" required>
 				</div>
 				<div class="form-group">
@@ -237,3 +237,43 @@ if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
     </div>
   </div>
 </div><!--Изменение времени-->
+<div class="modal fade" id="show_rasp_modal" tabindex="-1" role="dialog"><!--Просмотр расписания-->
+  <div class="modal-dialog modal-mal" role="document">
+    <div class="modal-content">
+	  	<div style="padding: 1px;" class="modal-body">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title" style="float: right;"><b>12</b> неделя</h3>
+						    		<h3 class="panel-title">Пятница (<b>27 Апреля</b>)</h3>
+						  		</div>
+								<table class="table table-bordered">
+									<thead>
+										<tr class="btop bleft bbottom bright">
+											<th class="text-center">№</th>
+											<th class="text-center">ауд.</th>
+											<th class="text-center">Преподаватель</th>
+										</tr>
+									</thead>
+									<tbody class="text-center">
+									<tr class="para_num_1 bright bleft">
+									<td class="time_para" rowspan="2" style="border-bottom: 2px solid #000000;"><b>1</b><br>(9:00-10:35)</td>
+									<td colspan="2">Военная подготовка <span class="label label-default">Практические занятия</span></td></tr>
+									<tr class="para_num_1 bbottom bright"><td style="word-wrap: break-word;"></td><td><span data-toggle="tooltip" title="" data-original-title="  "><i></i></span></td></tr><tr class="para_num_2 bright bleft">
+									<td class="time_para" rowspan="2" style="border-bottom: 2px solid #000000;"><b>2</b><br>(10:45-12:20)</td>
+									<td colspan="2">Военная подготовка <span class="label label-default">Практические занятия</span></td></tr>
+									<tr class="para_num_2 bbottom bright"><td style="word-wrap: break-word;"></td><td><span data-toggle="tooltip" title="" data-original-title="  "><i></i></span></td></tr><tr class="para_num_3 bright bleft">
+									<td class="time_para" rowspan="2" style="border-bottom: 2px solid #000000;"><b>3</b><br>(13:00-14:35)</td>
+									<td colspan="2">Военная подготовка <span class="label label-default">Практические занятия</span></td></tr>
+									<tr class="para_num_3 bbottom bright"><td style="word-wrap: break-word;"></td><td><span data-toggle="tooltip" title="" data-original-title="  "><i></i></span></td></tr><tr class="para_num_4 bright bleft">
+									<td class="time_para" rowspan="2" style="border-bottom: 2px solid #000000;"><b>4</b><br>(14:45-16:20)</td>
+									<td colspan="2">Военная подготовка <span class="label label-default">Практические занятия</span></td></tr>
+									<tr class="para_num_4 bbottom bright"><td style="word-wrap: break-word;"></td><td><span data-toggle="tooltip" title="" data-original-title="  "><i></i></span></td></tr>								</tbody>
+								</table>
+							</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+		</div>
+    </div>
+  </div>
+</div><!--Просмотр расписания-->

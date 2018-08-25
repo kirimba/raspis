@@ -56,6 +56,12 @@
 	#hide_pc{
 		display: none;
 	}
+	.table-month>tbody>tr>td.tss{
+		font-size: 12pt;
+	}
+	.table-month>tbody>tr>td{
+		font-size: 20pt;
+	}
 }
 @media screen and (min-width: 767px){
 	#hide_pc{
@@ -64,6 +70,49 @@
 	#hide_mob{
 		display: none;
 	}
+	.table-month>tbody>tr>td.tss{
+		font-size: 20pt;
+	}
+	.table-month>tbody>tr>td{
+		font-size: 40pt;
+	}
+	.modal-mal {
+    	width: 350px;
+	}
+}
+@media screen and (min-width: 992px){
+	.table-month>tbody>tr>td.tss{
+		font-size: 30pt;
+	}
+	.table-month>tbody>tr>td{
+		font-size: 50pt;
+	}
+}
+@media screen and (min-width: 1200px){
+	.table-month>tbody>tr>td.tss{
+		font-size: 40pt;
+	}
+	.table-month>tbody>tr>td{
+		font-size: 65pt;
+	}
+}
+.table-month>tbody>tr>th{
+	text-align: center;
+	padding: 8px 0px;
+}
+.table-month>tbody>tr>td{
+	text-align: center;
+	vertical-align: middle;
+	padding: 0px;
+	font-family: "Courier New";
+}
+.table-month>tbody>tr>td:hover{
+	background-color: #ddd;
+	cursor: pointer;
+}
+.table-month>tbody>tr>td.tss:hover{
+	background-color: #fff;
+	cursor: initial;
 }
 .navbar-te {
 	color: #777;

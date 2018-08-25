@@ -67,6 +67,7 @@ $('#inputSerchDay').datepicker({
 	format: "yyyy-mm-dd",
 	todayHighlight: true,
 	clearBtn: true,
+	todayBtn: "linked",
 	language: "ru",
 	ntop: 70,
 	autoclose: true,
@@ -83,6 +84,7 @@ $('#inputSerchDay').datepicker({
 $('#inputSerchDay2').datepicker({
 	todayHighlight: true,
 	language: "ru",
+	todayBtn: true,
 	ntop: 70,
 	autoclose: true,
 	defaultViewDate: resultget,
@@ -145,9 +147,23 @@ function dann(){
 	return resulte;
 }
 
+function width_month(){
+	if($(window).width()>992)
+		var cdvig = 7;
+	else
+		var cdvig = 1;
+	var td_width = $('.tdd').width()-cdvig;
+	$('.table-month').find('td').height(td_width)
+	$('.table-month').find('td').width(td_width)
+	$('.tss').attr('style', '')
+	var windo_heidht = $(window).height()-200;
+	$('.table-month').css('max-height',windo_heidht+'px')
+}
+
 window.onload = function(){
 	var list1 = document.getElementsByClassName("time_para");
 	var list2 = [];
+	width_month();
 	if(list1[0]!=undefined){
 	for (var i = 0; i < list1.length; i++) {
 		var list3 = [];

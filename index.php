@@ -23,7 +23,7 @@ require("code.php");
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body style="height: 100%;">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -106,7 +106,7 @@ require("code.php");
           </ul>
         </div><!--/.nav-collapse -->
     </div><!--Строка меню-->
-    <div style="margin-top: 70px;" class="container">
+    <div style="margin-top: 70px; height: 100%;" class="container">
 	<?php
 	if(isset($alert))
 			echo $alert;
@@ -145,13 +145,42 @@ require("code.php");
 				<div class="col-md-3 col-xs-6"><h3 class="panel-title">Время: <b id="clock"><?=date('G:i:s',(time()+60*60*3))?></b></h3></div>
 				</div>
 			</div><!--Информация о дне, неделе, времени-->
-
+			
 			<?php
 			if(!isset($error1)){
 				if(isset($alert2))
 				echo $alert2;
-
-				if($_GET['page'] == 'week'){
+				if($_GET['page'] == 'month'){
+					?>
+					<div  class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><?=$monthes[date("n", (time()+60*60*3))]?></h3>
+					</div>
+					<table class="table-month table table-bordered  table-responsive">
+						<tbody>
+						<tr>
+							<th>\</th>
+							<th class="tdd">Пн</th>
+							<th>Вт</th>
+							<th>Ср</th>
+							<th>Чт</th>
+							<th>Пт</th>
+							<th>Сб</th>
+							<th>Вс</th>
+					</tr>
+					<?php
+					for($i1=0; $i1<5; $i1++){
+						echo "<tr><td class='tss'>".($i1+1+10)."</td>";
+						for($i2=$i1*7; $i2<($i1+1)*7; $i2++)
+							echo"<td data-toggle='modal' data-target='#show_rasp_modal'>".$i2."</td>";
+						echo"</tr>";
+					}
+					?>
+					</tbody>
+				</table>
+			</div>
+					<?php
+				}elseif($_GET['page'] == 'week'){
 					?>
 					<ul class="pager">
 			  			<li class="previous"><a href="/?page=week&num=<?=$week_all-1?>">&larr; Предыдущая</a></li>

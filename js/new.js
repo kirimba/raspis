@@ -67,6 +67,7 @@ $('#inputSerchDay').datepicker({
 	format: "yyyy-mm-dd",
 	todayHighlight: true,
 	clearBtn: true,
+	todayBtn: "linked",
 	language: "ru",
 	ntop: 70,
 	autoclose: true,
@@ -83,6 +84,7 @@ $('#inputSerchDay').datepicker({
 $('#inputSerchDay2').datepicker({
 	todayHighlight: true,
 	language: "ru",
+	todayBtn: true,
 	ntop: 70,
 	autoclose: true,
 	defaultViewDate: resultget,

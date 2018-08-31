@@ -81,9 +81,9 @@ require("code.php");
           	<li>
           	  <div id="inputSerchDayform" class="navbar-form" role="search">
 								<div class="form-group">
-									<input type="date" id="inputSerchDay" class="form-control" placeholder="Поиск">
+									<input type="text" id="inputSerchDay" class="form-control" placeholder="yyyy-mm-dd">
 								</div>
-								<button type="submit" onclick="serch_day()" class="btn btn-default">Поиск</button>
+								<button type="submit" onclick="serch_day()" class="btn btn-default">Перейти</button>
 							</div>
           	</li>
         	<li>

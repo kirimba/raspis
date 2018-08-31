@@ -45,7 +45,7 @@ do{
 	$para = stristr($para, '</td>');
 	$para = stristr($para, '<td');
 
-//echo "||";
+	//echo "||";
 	$day_par = 1;
 	do{
 		$den = substr($para, 0, strpos($para, '</td>')+5);
@@ -59,6 +59,7 @@ do{
 			$type_par = substr($type_par, 1, strlen($type_par)-3);
 			//echo $type_par;
 			//echo "|";
+			$den = stristr($den, '<br><span');
 			$den = stristr($den, '<span');
 			$nedel = strip_tags(substr($den, 0, strpos($den, '<br>')+4));
 			$nedel = substr($nedel, 1, strlen($nedel)-4);

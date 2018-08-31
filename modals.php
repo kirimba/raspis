@@ -14,7 +14,7 @@ if($_SESSION['mast']){
 				<p>Зайди на эту страницу: <a href="https://cabinet.sut.ru/raspisanie_all_new">линк</a>, сохранить страницу как и загрузить сюда.</p>
 				<div class="form-group">
 				    <label for="inputName">Название</label>
-				    <input name="name-grup" type="text" class="form-control" id="inputName" placeholder="Название" required>
+				    <input name="name-grup-bo" type="text" class="form-control" id="inputName" placeholder="Название" required>
 				</div>
 				<div class="form-group">
 				    <label for="inputFile">Загрузить фаил расписания</label>

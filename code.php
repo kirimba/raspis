@@ -108,7 +108,7 @@ if(isset($_POST['name-grup'], $_POST['data-tart-grup'], $_POST['pin-grup'])){ //
 }//-------------------------Добаление группы
 
 if($_SESSION['mast']){//Добавление группы и пар из Бонч
-	if(isset($_POST['data-tart-grup'], $_POST['pin-grup'])){
+	if(isset($_POST['data-tart-grup'], $_POST['pin-grup'], $_POST['name-grup-bo'],)){
 		$time11 = strtotime('+ 3 hour');
 		$data11 = date("d.m.Y H:i", $time11);
 		
@@ -149,7 +149,7 @@ if($_SESSION['mast']){//Добавление группы и пар из Бон�
 							$alert = $alert.'<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Не UTF-8 - преобразуем.</div>';
 							$pos = iconv(mb_detect_encoding($pos), "UTF-8", $pos);
 						}
-						$name_grup = htmlspecialchars($_POST['name-grup']);
+						$name_grup = htmlspecialchars($_POST['name-grup-bo']);
 						$gruptra = rus2translit($name_grup);
 						//$alert = $alert.'<table  border="1"><tbody>'.$pos.'</tbody></table>';
 						file_put_contents('raspisanie/'.$gruptra.' '.$data11.'.txt', $pos);

@@ -228,6 +228,8 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				for($i=1; $i<=6; $i++)
 					$num_par[$i]=0;
 
+				$week_s_nach = (date('W',$start_grup)+$week_all-1)-date('W',strtotime('+ 3 hour'));
+				$week_s_nach1 =  strtotime("last Monday + ".$week_s_nach." week 3 hour");
 
 				if($rez = $mysqli->query("SELECT * FROM raspis WHERE id_grup = $id_grup ORDER BY `para` ASC")){
 					if(($rez->num_rows)>0){
@@ -246,8 +248,6 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 								}
 							}
 						}
-						$week_s_nach = (date('W',$start_grup)+$week_all-1)-date('W',strtotime('+ 3 hour'));
-						$week_s_nach1 =  strtotime("last Monday + ".$week_s_nach." week 3 hour");
     				}else{
     					for($i=1; $i<=6; $i++)
     						$list_par[$i][1] = '<tr class="bbottom bright bleft"><td colspan="3"><h2 class="text-center">Пар нет!</h2></td></tr>';

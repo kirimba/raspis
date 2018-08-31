@@ -108,7 +108,7 @@ if(isset($_POST['name-grup'], $_POST['data-tart-grup'], $_POST['pin-grup'])){ //
 }//-------------------------Добаление группы
 
 if($_SESSION['mast']){//Добавление группы и пар из Бонч
-	if(isset($_POST['data-tart-grup'], $_POST['pin-grup'], $_POST['name-grup-bo'],)){
+	if(isset($_POST['data-tart-grup'], $_POST['pin-grup'], $_POST['name-grup-bo'])){
 		$time11 = strtotime('+ 3 hour');
 		$data11 = date("d.m.Y H:i", $time11);
 		

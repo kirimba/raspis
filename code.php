@@ -192,8 +192,8 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				$pin = $result['pin'];
 			}
 			$rez->free();
-			$week = (int)((date('z',(time()+60*60*3)) - date('z',$start_grup))/7)+1;
-			$day_num = date('w',(time()+60*60*3));
+			$week = (int)(date('W',strtotime('+ 3 hour')) - date('W',$start_grup))+1;
+			$day_num = date('w',strtotime('+ 3 hour'));
 			//$week = 13;
 			//$day_num = 2;
 			
@@ -262,7 +262,7 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				$active_day=true;
 				if(isset($_GET['day']) && is_numeric(htmlspecialchars($_GET['day']))){
 					$day_11 = htmlspecialchars($_GET['day']);
-					$week_new = (int)((date('z',$day_11) - date('z',$start_grup))/7)+1;
+					$week_new = (int)(date('W',$day_11) - date('W',$start_grup))+1;
 					$day_num_new = date('w',$day_11);
 					$data_11 = date("d.m",$day_11);
 				}else{

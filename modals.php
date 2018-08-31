@@ -179,6 +179,7 @@ if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
 			<div class="form-group">
 				<label for="inputData">Дата начала семестра</label>
 				<input name="data-tart-grup" type="date" class="form-control" id="inputData" placeholder="Дата начала семестра" required>
+				<small>Любой день <b>первой</b> недели</small>
 			</div>
 			<div class="form-group">
 				<label for="inputPin">Пин код для доступа к редактированию</label>

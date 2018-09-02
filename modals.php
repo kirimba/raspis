@@ -140,7 +140,8 @@ if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
     </div>  
   </div>  
 </div><!--Добавление пары-->
-<?}?>
+<?php
+}?>
 <div class="modal fade" id="add_pin_modal" tabindex="-1" role="dialog"><!--Разрешение на редактирование-->
   <div class="modal-dialog" role="document">
     <div class="modal-content">

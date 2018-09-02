@@ -1,5 +1,9 @@
 <!--Modals-->
 <?php
+if(isset($_GET['page']))
+	$per_page = "?page=".$_GET['page'];
+?>
+<?php
 if($_SESSION['mast']){
 ?>
 <div class="modal fade" id="add_par_bonch_modal" tabindex="-1" role="dialog"><!--Добавление расписания Бонч-->
@@ -171,7 +175,7 @@ if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Добавление группы</h4>
       </div>
-	  <form role="form" name="add-grup" method="post" action="/">
+	  <form role="form" name="add-grup" method="post" action="/<?=$per_page?>">
 	  	<div class="modal-body">
 			<div class="form-group">
 				<label for="inputName">Название</label>

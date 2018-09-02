@@ -67,6 +67,10 @@ require("code.php");
             			echo '<li class="divider"></li>
             			<li><a href="#" data-toggle="modal" data-target="#add_par_bonch_modal">Добавление пар Бонч</a></li>';
             		}
+            		if((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or ($_SESSION['mast'])){
+            			echo '<li class="divider"></li>
+            			<li><a href="/?page=edit-par">Редактировать пары</a></li>';
+            		}
             		if(isset($last_update_raspis)){
             			echo '<li class="divider"></li>';
             			echo '<li><p class="navbar-te">Последнее обновление ';
@@ -112,8 +116,17 @@ require("code.php");
 			echo $alert;
 	?>
 	<?php
-	if($_GET['page'] == 'add-grup'){}
-	elseif($_GET['page'] == 'add-par-bonch'){}
+	if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or ($_SESSION['mast']))){
+	?>
+		<div class="alert alert-info"><!--Информация о дне, неделе, времени-->
+			<div class="row text-center">
+				<div class="col-md-6 col-xs-12"><h3 class="panel-title">Сегодня: <b><?=day($day_num)?></b></h3></div>
+				<div class="col-md-6 col-xs-12"><h3 class="panel-title">Время: <b id="clock"><?=date('G:i:s',(time()+60*60*3))?></b></h3></div>
+			</div>
+		</div><!--Информация о дне, неделе, времени-->
+	<?php
+		echo $list_grups;
+	}
 	else{
 		if((!isset($_COOKIE['id'])) or $vibr_grup){ //Выбор группы
 	    	if($rez = $mysqli->query( "SELECT * FROM grups")){

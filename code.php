@@ -179,6 +179,23 @@ $active_day=false;
 $active_week=false;    //активные кнопки меню
 $active_vibor=true;
 
+if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or ($_SESSION['mast']))){
+	$active_vibor=false;
+	if($_SESSION['mast']){
+		if($rez = $mysqli->query( "SELECT * FROM grups")){
+			$list_grups='<div class="panel panel-default"><div class="panel-heading">Группы</div><table class="table table-bordered><thead><tr><th>#</th><th>Название</th><th>Неделя начала симместра</th><th>Последнее обновление расписания</th><th>Пин</th><th>Действие</th></tr></thead><tbody>';
+			while($result = $rez->fetch_assoc()){
+				$list_grups = $list_grups.'<tr><td>'.$result['id_grup'].'</td><td>'.$result['name'].'</td>';
+				$list_grups = $list_grups.'<td>'.$result['start'].'</td><td>'.$result['last-apdata'].'</td><td>'.$result['pin'].'</td>';
+				$list_grups = $list_grups.'<td style="cursor: pointer;"><span class="glyphicon glyphicon-remove"></span></td></tr>';
+
+				//$list_grups = $list_grups.'<td><div class="btn-group"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></div></td></tr>';
+			}
+			$list_grups = $list_grups.'</tbody></table></div>';
+		}
+	}
+}
+
 if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор группы
 	$active_vibor=false;
 	$id_grup = htmlspecialchars($_COOKIE['id']);

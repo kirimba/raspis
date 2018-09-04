@@ -42,6 +42,28 @@ if($_SESSION['mast']){
     </div>
   </div>
 </div><!--Добавление расписания Бонч-->
+<div class="modal fade" id="dell_group_modal" tabindex="-1" role="dialog"><!--Удалить группу?-->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Удалить?</h4>
+      </div>
+	  <form class="form" role="form" name="add-pin" method="post" action="/">
+		<div class="modal-body">
+			<div class="form-group">
+				<label for="inputPin1">Пин код для доступа к редактированию группы <?=$name_grup?></label>
+				<input name="pingrup" type="text" class="form-control" id="inputPin1" placeholder="Пин" required>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-default">Ввести</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+		</div>
+	  </form>
+    </div>
+  </div>
+</div><!--Удалить группу?-->
 <?php
 }
 if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){

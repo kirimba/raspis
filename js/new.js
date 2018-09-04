@@ -104,6 +104,11 @@ $('#inputSerchDay2').on('changeDate', function() {
 	
 });
 
+function dell_group(id, name){
+	$('#dell_group_modal').modal("show");
+	
+}
+
 function dann(){
 	var ear;
 	var man;

@@ -183,15 +183,15 @@ if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] =
 	$active_vibor=false;
 	if($_SESSION['mast']){
 		if($rez = $mysqli->query( "SELECT * FROM grups")){
-			$list_grups='<div class="panel panel-default"><div class="panel-heading">Группы</div><table class="table table-bordered><thead><tr><th>#</th><th>Название</th><th>Неделя начала симместра</th><th>Последнее обновление расписания</th><th>Пин</th><th>Действие</th></tr></thead><tbody>';
+			$list_grups='<div class="panel panel-default"><div class="panel-heading">Группы</div><div class="table-responsive"><table class="table table-bordered"><thead><tr><th>#</th><th>Название</th><th>Неделя начала симместра</th><th>Последнее обновление расписания</th><th>Пин</th><th>Действие</th></tr></thead><tbody>';
 			while($result = $rez->fetch_assoc()){
 				$list_grups = $list_grups.'<tr><td>'.$result['id_grup'].'</td><td>'.$result['name'].'</td>';
 				$list_grups = $list_grups.'<td>'.$result['start'].'</td><td>'.$result['last-apdata'].'</td><td>'.$result['pin'].'</td>';
-				$list_grups = $list_grups.'<td style="cursor: pointer;"><span class="glyphicon glyphicon-remove"></span></td></tr>';
+				//$list_grups = $list_grups.'<td style="cursor: pointer;"><span class="glyphicon glyphicon-remove"></span></td></tr>';
 
-				//$list_grups = $list_grups.'<td><div class="btn-group"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></div></td></tr>';
+				$list_grups = $list_grups.'<td class="text-center" style="padding: 3.5px 8px;"><div class="btn-group" style="width:100%;"><button type="button" class="btn btn-default btn-sm" style="width:50%;"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-default btn-sm" style="width:50%;" onclick="dell_group()"><span class="glyphicon glyphicon-remove"></span></button></div></td></tr>';
 			}
-			$list_grups = $list_grups.'</tbody></table></div>';
+			$list_grups = $list_grups.'</tbody></table></div></div>';
 		}
 	}
 }

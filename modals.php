@@ -49,7 +49,7 @@ if($_SESSION['mast']){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Удалить?</h4>
       </div>
-	  <form class="form" role="form" name="add-pin" method="post" action="/">
+	  <!--<form class="form" role="form" name="add-pin" method="post" action="/">-->
 		<div class="modal-body">
 			<div class="form-group">
 				<p class="text-center">Удалить группу: <span id="dell_group_name"></span></p>
@@ -58,10 +58,10 @@ if($_SESSION['mast']){
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-default">Ввести</button>
+			<button type="button" class="btn btn-default" id="dell_group_button" onclick="dell_group_run()">Удалить</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
 		</div>
-	  </form>
+	  <!--</form>-->
     </div>
   </div>
 </div><!--Удалить группу?-->

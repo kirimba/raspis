@@ -104,11 +104,31 @@ $('#inputSerchDay2').on('changeDate', function() {
 	
 });
 
-function dell_group(id, name){
+function dell_group(id, pin){
 	$('#dell_group_modal').modal("show");
-	$('#dell_group_name').html(name);
+	var id_name = $('#group_name_'+id).html();
+	$('#dell_group_name').html(id_name);
 	$('#dell_group_id').val(id);
+	$('#dell_group_pin').val(pin);
 }
+
+function dell_group_run(){
+    $.ajax({
+    type: "POST",
+    url: "function.php",
+    data: "dell_group=1&id="+$("#dell_group_id").val()+"&pin="+$("#dell_group_pin").val(),
+    success: function(reply){
+      if (reply == 'Ok') {
+        window.alert('ok');
+      } else {
+        window.alert(reply);
+      }
+    },
+    error: function(resp) {
+      window.alert('error');
+    }
+  })
+};
 
 function dann(){
 	var ear;

@@ -189,7 +189,7 @@ if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] =
 				$list_grups = $list_grups.'<td>'.$result['start'].'</td><td>'.$result['last-apdata'].'</td><td>'.$result['pin'].'</td>';
 				//$list_grups = $list_grups.'<td style="cursor: pointer;"><span class="glyphicon glyphicon-remove"></span></td></tr>';
 
-				$list_grups = $list_grups.'<td class="text-center" style="padding: 3.5px 8px;"><div class="btn-group" style="width:100%;"><button type="button" class="btn btn-default btn-sm" style="width:50%;"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-default btn-sm" style="width:50%;" onclick="dell_group()"><span class="glyphicon glyphicon-remove"></span></button></div></td></tr>';
+				$list_grups = $list_grups.'<td class="text-center" style="padding: 3.5px 8px;"><div class="btn-group" style="width:100%;"><button type="button" class="btn btn-default btn-sm" style="width:50%;"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-default btn-sm" style="width:50%;" onclick="dell_group('.$result['id_grup'].',"'.$result['name'].'")"><span class="glyphicon glyphicon-remove"></span></button></div></td></tr>';
 			}
 			$list_grups = $list_grups.'</tbody></table></div></div>';
 		}

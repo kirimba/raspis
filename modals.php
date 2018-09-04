@@ -52,8 +52,9 @@ if($_SESSION['mast']){
 	  <form class="form" role="form" name="add-pin" method="post" action="/">
 		<div class="modal-body">
 			<div class="form-group">
-				<label for="inputPin1">Пин код для доступа к редактированию группы <?=$name_grup?></label>
-				<input name="pingrup" type="text" class="form-control" id="inputPin1" placeholder="Пин" required>
+				<p class="text-center">Удалить группу: <span id="dell_group_name"></span></p>
+				<input type="hidden" id="dell_group_id" name="dell_group_id" value="">
+				<input type="hidden" id="dell_group_pin" name="dell_group_pin" value="">			
 			</div>
 		</div>
 		<div class="modal-footer">

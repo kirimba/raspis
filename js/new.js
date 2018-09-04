@@ -106,7 +106,8 @@ $('#inputSerchDay2').on('changeDate', function() {
 
 function dell_group(id, name){
 	$('#dell_group_modal').modal("show");
-	
+	$('#dell_group_name').html(name);
+	$('#dell_group_id').val(id);
 }
 
 function dann(){

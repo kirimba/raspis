@@ -119,7 +119,7 @@ function dell_group_run(){
     data: "dell_group=1&id="+$("#dell_group_id").val()+"&pin="+$("#dell_group_pin").val(),
     success: function(reply){
       if (reply == 'Ok') {
-        window.alert('ok');
+        $('#dell_group_modal').modal("hide");
       } else {
         window.alert(reply);
       }

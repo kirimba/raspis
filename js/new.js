@@ -115,11 +115,31 @@ function dell_group(id, pin){
 function dell_group_run(){
     $.ajax({
     type: "POST",
-    url: "function.php",
+    url: "ajax.php",
     data: "dell_group=1&id="+$("#dell_group_id").val()+"&pin="+$("#dell_group_pin").val(),
     success: function(reply){
       if (reply == 'Ok') {
         $('#dell_group_modal').modal("hide");
+        list_group();
+      } else {
+        window.alert("error");
+      }
+    },
+    error: function(resp) {
+      window.alert('error');
+    }
+  })
+};
+
+function list_group(){
+    $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: "bod_list_droup=1",
+    success: function(reply){
+      if (reply.substring(0,2) == 'Ok') {
+      	reply = reply.substring(2);
+      	 $('#bod_list_group').html(reply);
       } else {
         window.alert(reply);
       }

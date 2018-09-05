@@ -189,7 +189,7 @@ require("code.php");
 										if($montsb)
 											echo date("d.m", strtotime("+ ".($num_day-1)." day", $week_s_nach1));
 										else
-											echo date("d ".$monthes[date("n", strtotime("+ ".($num_day-1)." day", $week_s_nach1))], strtotime("+ ".($num_day-1)." day", $week_s_nach1));
+											echo date("d ".name_monthes(date("n", strtotime("+ ".($num_day-1)." day", $week_s_nach1))), strtotime("+ ".($num_day-1)." day", $week_s_nach1));
 										?></b>)</h3>
 								</div>
 								<table class="table table-bordered">
@@ -236,7 +236,7 @@ require("code.php");
 										if($montsb)
 											echo $data_11;
 										else
-											echo date("d ".$monthes[date("n", $day_11)], $day_11);
+											echo date("d ".name_monthes(date("n", $day_11)), $day_11);
 										?></b>)</h3>
 						  	</div>
 								<table class="table table-bordered">

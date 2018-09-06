@@ -123,9 +123,10 @@ $active_vibor=true;
 if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or (isset($_SESSION['mast'])))){
 	$active_vibor=false;
 	if($_SESSION['mast']){
-		$list_grups='<div class="panel panel-default"><div class="panel-heading">Группы</div><div class="table-responsive"><table class="table table-bordered"><thead><tr><th>#</th><th>Название</th><th>Неделя начала симместра</th><th>Последнее обновление расписания</th><th>Пин</th><th>Действие</th></tr></thead><tbody id="bod_list_group">';
+		$list_ma =array();
+		$list_grups = insert_template("list_group_head", $list_ma, "list_group");
 		$list_grups = $list_grups.load_table_group($mysqli);
-		$list_grups = $list_grups.'</tbody></table></div></div>';
+		$list_grups = $list_grups.insert_template("list_group_footer", $list_ma, "list_group");
 	}
 }
 

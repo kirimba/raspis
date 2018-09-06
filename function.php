@@ -66,11 +66,23 @@ $monthes= array(
 function load_table_group($mysqli){
 	if($rez = $mysqli->query( "SELECT * FROM grups")){
 		while($result = $rez->fetch_assoc()){
-			$list_grups = $list_grups.'<tr><td>'.$result['id_grup'].'</td><td id="group_name_'.$result['id_grup'].'">'.$result['name'].'</td>';
-			$list_grups = $list_grups.'<td>'.$result['start'].'</td><td>'.$result['last-apdata'].'</td><td>'.$result['pin'].'</td>';
-			$list_grups = $list_grups.'<td class="text-center" style="padding: 3.5px 8px;"><div class="btn-group" style="width:100%;"><button type="button" class="btn btn-default btn-sm" style="width:50%;"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-default btn-sm" style="width:50%;" onclick="dell_group('.$result['id_grup'].','.$result['pin'].')"><span class="glyphicon glyphicon-remove"></span></button></div></td></tr>';
+			$mas_name = array(
+				'{start}'		=> $result['start'],
+				'{id_grup}'		=> $result['id_grup'],
+				'{last-apdata}'	=> $result['last-apdata'],
+				'{pin}'			=> $result['pin'],
+				'{name}'		=> $result['name']
+			);
+			$list_grups = $list_grups.insert_template("list_group", $mas_name, "list_group");
 		}
 	}
 	return $list_grups;
+}
+
+function insert_template($name, $mas, $categor=""){
+	if($categor != "")
+		$categor = "/".$categor."/";
+	$body = file_get_contents("template/".$categor.$name.".htm");
+	return strtr($body, $mas);
 }
 ?>

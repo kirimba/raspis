@@ -1,0 +1,17 @@
+<tr>
+	<td>{id_grup}</td>
+	<td id="group_name_{id_grup}">{name}</td>
+	<td>{start}</td>
+	<td>{last-apdata}</td>
+	<td>{pin}</td>
+	<td class="text-center" style="padding: 3.5px 8px;">
+		<div class="btn-group" style="width:100%;">
+			<button type="button" class="btn btn-default btn-sm" style="width:50%;">
+				<span class="glyphicon glyphicon-edit"></span>
+			</button>
+			<button type="button" class="btn btn-default btn-sm" style="width:50%;" onclick="dell_group({id_grup}, {pin})">
+				<span class="glyphicon glyphicon-remove"></span>
+			</button>
+		</div>
+	</td>
+</tr>

@@ -1,17 +1,26 @@
 <tr>
 	<td>{id_grup}</td>
-	<td id="group_name_{id_grup}">{name}</td>
+	<td style="padding: 3.5px 8px;">
+		<div class="btn-group" style="float: right;">
+			<div class="btn-group">
+				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" data-original-title="Редактировать группу">
+					<span class="glyphicon glyphicon-edit"></span>
+				</span>
+			</div>
+			<div class="btn-group">
+				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" data-original-title="Очистить расписание">
+					<span class="glyphicon glyphicon-trash"></span>
+				</span>
+			</div>
+			<div class="btn-group">
+				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" onclick="dell_group({id_grup}, {pin})" data-original-title="Удалить группу">
+					<span class="glyphicon glyphicon-remove"></span>
+				</span>
+			</div>
+		</div>
+		<span id="group_name_{id_grup}" style="float: left; margin: 4.5px 0px;">{name}</span>
+	</td>
+	<td>{pin}</td>
 	<td>{start}</td>
 	<td>{last-apdata}</td>
-	<td>{pin}</td>
-	<td class="text-center" style="padding: 3.5px 8px;">
-		<div class="btn-group" style="width:100%;">
-			<button type="button" class="btn btn-default btn-sm" style="width:50%;">
-				<span class="glyphicon glyphicon-edit"></span>
-			</button>
-			<button type="button" class="btn btn-default btn-sm" style="width:50%;" onclick="dell_group({id_grup}, {pin})">
-				<span class="glyphicon glyphicon-remove"></span>
-			</button>
-		</div>
-	</td>
 </tr>

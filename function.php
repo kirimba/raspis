@@ -67,7 +67,7 @@ function load_table_group($mysqli){
 	if($rez = $mysqli->query( "SELECT * FROM grups")){
 		while($result = $rez->fetch_assoc()){
 			$mas_name = array(
-				'{start}'		=> $result['start'],
+				'{start}'		=> date("d.m.Y",$result['start']),
 				'{id_grup}'		=> $result['id_grup'],
 				'{last-apdata}'	=> $result['last-apdata'],
 				'{pin}'			=> $result['pin'],

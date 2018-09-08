@@ -1,7 +1,13 @@
-<tr>
+<tr id="dell_stroc_droup_{id_grup}">
 	<td>{id_grup}</td>
 	<td style="padding: 3.5px 8px;">
-		<div class="btn-group" style="float: right;">
+		<span id="group_name_{id_grup}" style="float: left; margin: 4.5px 0px;">{name}</span>
+		<div class="btn-group" style="float: right; width: 137px;">
+			<div class="btn-group">
+				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" onclick="select_group({id_grup})" data-original-title="Выбрать группу">
+					<span class="glyphicon glyphicon-ok"></span>
+				</span>
+			</div>
 			<div class="btn-group">
 				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" data-original-title="Редактировать группу">
 					<span class="glyphicon glyphicon-edit"></span>
@@ -18,7 +24,6 @@
 				</span>
 			</div>
 		</div>
-		<span id="group_name_{id_grup}" style="float: left; margin: 4.5px 0px;">{name}</span>
 	</td>
 	<td>{pin}</td>
 	<td>{start}</td>

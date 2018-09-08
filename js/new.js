@@ -113,14 +113,15 @@ function dell_group(id, pin){
 }
 
 function dell_group_run(){
+	var id_group = $("#dell_group_id").val();
     $.ajax({
     type: "POST",
     url: "ajax.php",
-    data: "dell_group=1&id="+$("#dell_group_id").val()+"&pin="+$("#dell_group_pin").val(),
+    data: "dell_group=1&id="+id_group+"&pin="+$("#dell_group_pin").val(),
     success: function(reply){
       if (reply == 'Ok') {
         $('#dell_group_modal').modal("hide");
-        list_group();
+        $('#dell_stroc_droup_'+id_group).remove();
       } else {
         window.alert("error");
       }
@@ -131,7 +132,16 @@ function dell_group_run(){
   })
 };
 
-function list_group(){
+function select_group(id){
+	$.cookie('id', id, {
+		expires: 30,
+		path: '/',
+	});
+	var name = $('#group_name_'+id).html();
+	$('#name_grup_bar').html(name);
+};
+
+function list_group_load(){
     $.ajax({
     type: "POST",
     url: "ajax.php",
@@ -140,6 +150,7 @@ function list_group(){
       if (reply.substring(0,2) == 'Ok') {
       	reply = reply.substring(2);
       	 $('#bod_list_group').html(reply);
+      	 $('[data-toggle="tooltip"]').tooltip();
       } else {
         window.alert(reply);
       }

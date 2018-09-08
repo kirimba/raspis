@@ -35,7 +35,7 @@ require("code.php");
           <button id="inputSerchDay2" type="button" style="padding:7px 14px 5px 14px;" class="navbar-toggle">
           	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
           </button>
-          <a class="navbar-brand" href="/">Расписание <?=$name_grup?></a>
+          <a class="navbar-brand" href="/">Расписание <span id="name_grup_bar"><?=$name_grup?></span></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

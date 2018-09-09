@@ -4,7 +4,7 @@ if(isset($_GET['page']))
 	$per_page = "?page=".$_GET['page'];
 ?>
 <?php
-if($_SESSION['mast']){
+if(isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar){
 ?>
 <div class="modal fade" id="add_par_bonch_modal" tabindex="-1" role="dialog"><!--Добавление расписания Бонч-->
   <div class="modal-dialog" role="document">
@@ -42,6 +42,10 @@ if($_SESSION['mast']){
     </div>
   </div>
 </div><!--Добавление расписания Бонч-->
+<?php
+}
+if((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or (isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar)){
+?>
 <div class="modal fade" id="dell_group_modal" tabindex="-1" role="dialog"><!--Удалить группу?-->
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -49,10 +53,9 @@ if($_SESSION['mast']){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Удалить?</h4>
       </div>
-	  <!--<form class="form" role="form" name="add-pin" method="post" action="/">-->
 		<div class="modal-body">
 			<div class="form-group">
-				<p class="text-center">Удалить группу: <span id="dell_group_name"></span></p>
+				<p class="text-center">Удалить группу вместе с расписанием: <span id="dell_group_name"></span></p>
 				<input type="hidden" id="dell_group_id" name="dell_group_id" value="">
 				<input type="hidden" id="dell_group_pin" name="dell_group_pin" value="">			
 			</div>
@@ -61,10 +64,64 @@ if($_SESSION['mast']){
 			<button type="button" class="btn btn-default" id="dell_group_button" onclick="dell_group_run()">Удалить</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
 		</div>
-	  <!--</form>-->
     </div>
   </div>
 </div><!--Удалить группу?-->
+<div class="modal fade" id="clear_group_modal" tabindex="-1" role="dialog"><!--Очистить расписание группы?-->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Очистить?</h4>
+      </div>
+		<div class="modal-body">
+			<div class="form-group">
+				<p class="text-center">Очистить расписание группы: <span id="clear_group_name"></span></p>
+				<input type="hidden" id="clear_group_id" name="clear_group_id" value="">
+				<input type="hidden" id="clear_group_pin" name="clear_group_pin" value="">			
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" id="clear_group_button" onclick="clear_raspis_id_group_run()">Очистить</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+		</div>
+    </div>
+  </div>
+</div><!--Очистить расписание группы?-->
+<div class="modal fade" id="edit_group_modal" tabindex="-1" role="dialog"><!--Редактирование группы-->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Редактирование группы</h4>
+      </div>
+	  	<div class="modal-body">
+			<div id="edit_group_name_div" class="form-group has-feedback">
+				<label class="control-label" for="edit_group_name">Название</label>
+				<input name="edit_group_name_input" type="text" class="form-control" id="edit_group_name_input" placeholder="Название" required>
+				<span class="glyphicon form-control-feedback"></span>
+			</div>
+			<div id="edit_group_date_div" class="form-group has-feedback">
+				<label class="control-label" for="edit_group_date_input">Дата начала семестра</label>
+				<input name="edit_group_date_input" type="text" class="form-control" id="edit_group_date_input" placeholder="Дата начала семестра" required>
+				<span class="glyphicon form-control-feedback"></span>
+				<small>Любой день <b>первой</b> недели</small>
+			</div>
+			<div id="edit_group_pin_div" class="form-group has-feedback">
+				<label class="control-label" for="edit_group_pin_input">Пин код для доступа к редактированию</label>
+				<input name="edit_group_pin_input" type="text" class="form-control" id="edit_group_pin_input" placeholder="Пин код для доступа к редактированию" required>
+				<span class="glyphicon form-control-feedback"></span>
+			</div>
+			<input type="hidden" id="edit_group_id" name="edit_group_id" value="">
+			<input type="hidden" id="edit_group_pin_old" name="edit_group_pin_old" value="">
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" onclick="edit_group_run()">Изменить</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+		</div>
+    </div>
+  </div>
+</div><!--Редактирование группы-->
 <?php
 }
 if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){

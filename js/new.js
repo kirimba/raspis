@@ -123,11 +123,11 @@ function dell_group_run(){
         $('#dell_group_modal').modal("hide");
         $('#dell_stroc_droup_'+id_group).remove();
       } else {
-        window.alert("error");
+        window.alert(reply);
       }
     },
     error: function(resp) {
-      window.alert('error');
+      window.alert('Ошибка 0');
     }
   })
 };
@@ -141,22 +141,139 @@ function select_group(id){
 	$('#name_grup_bar').html(name);
 };
 
+function clear_raspis_id_group(id, pin){
+	$('#clear_group_modal').modal("show");
+	var id_name = $('#group_name_'+id).html();
+	$('#clear_group_name').html(id_name);
+	$('#clear_group_id').val(id);
+	$('#clear_group_pin').val(pin);
+}
+
+function clear_raspis_id_group_run(){
+  var id_group = $("#clear_group_id").val();
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: "clear_group=1&id="+id_group+"&pin="+$("#clear_group_pin").val(),
+    success: function(reply){
+      if (reply == 'Ok') {
+        $('#clear_group_modal').modal("hide");
+        alert("Очишено");
+      } else {
+        window.alert(reply);
+      }
+    },
+    error: function(resp) {
+      window.alert('Ошибка 0');
+    }
+  })
+};
+
+function edit_group(id){
+	$('#edit_group_modal').modal("show");
+	$('#edit_group_pin_div').removeClass('has-warning');
+	$('#edit_group_pin_div>span').removeClass('glyphicon-pencil');
+	$('#edit_group_name_div').removeClass('has-warning');
+	$('#edit_group_name_div>span').removeClass('glyphicon-pencil');
+	$('#edit_group_date_div').removeClass('has-warning');
+	$('#edit_group_date_div>span').removeClass('glyphicon-pencil');
+	var id_name = $('#group_name_'+id).html();
+	var id_pin = $('#group_pin_'+id).html();
+	var id_date = $('#group_date_'+id).html();
+	$('#edit_group_name_input').val(id_name);
+	$('#edit_group_date_input').val(id_date);
+	$('#edit_group_id').val(id);
+	$('#edit_group_pin_input').val(id_pin);
+	$('#edit_group_pin_old').val(id_pin);
+	$('#edit_group_date_input').datepicker({
+	format: "dd.mm.yyyy",
+	todayHighlight: true,
+	clearBtn: true,
+	todayBtn: "linked",
+	language: "ru",
+	ntop: 70,
+	autoclose: true,
+	toggleActive: true,
+	defaultViewDate: resultget,
+	beforeShowDay: function (date){
+                    if(date.getDate() == resultget["day"] && date.getMonth() == resultget["month"]){
+                        return {
+                          classes: 'acty'
+                        };
+                  	}
+                }
+	});
+	$('#edit_group_date_input').datepicker('update',id_date);
+	$('#edit_group_pin_input').on('input',function(){
+		if(id_pin != $(this).val()){
+			$('#edit_group_pin_div').addClass('has-warning');
+			$('#edit_group_pin_div>span').addClass('glyphicon-pencil');
+		}
+		else{
+			$('#edit_group_pin_div').removeClass('has-warning');
+			$('#edit_group_pin_div>span').removeClass('glyphicon-pencil');
+		}
+	});
+	$('#edit_group_name_input').on('input',function(){
+		if(id_name != $(this).val()){
+			$('#edit_group_name_div').addClass('has-warning');
+			$('#edit_group_name_div>span').addClass('glyphicon-pencil');
+		}
+		else{
+			$('#edit_group_name_div').removeClass('has-warning');
+			$('#edit_group_name_div>span').removeClass('glyphicon-pencil');
+		}
+	});
+	$('#edit_group_date_input').on('changeDate', function() {
+		if(id_date != $(this).val()){
+			$('#edit_group_date_div').addClass('has-warning');
+			$('#edit_group_date_div>span').addClass('glyphicon-pencil');
+		}
+		else{
+			$('#edit_group_date_div').removeClass('has-warning');
+			$('#edit_group_date_div>span').removeClass('glyphicon-pencil');
+		}
+	});
+};
+
+function edit_group_run(){
+	var new_dat = $('#edit_group_date_input').datepicker('getUTCDate');
+	var new_dat1 = new_dat.getTime()/1000;
+	$.ajax({
+	  type: "POST",
+	  url: "ajax.php",
+	  data: "edit_group=1&id="+$('#edit_group_id').val()+"&pin="+$('#edit_group_pin_input').val()+"&pin_old="+$('#edit_group_pin_old').val()+"&name="+$('#edit_group_name_input').val()+"&date="+new_dat1,
+	  success: function(reply){
+      if (reply == 'Ok') {
+        $('#edit_group_modal').modal("hide");
+        alert("Изменено");
+        list_group_load();
+      } else {
+        window.alert(reply);
+      }
+    },
+    error: function(resp) {
+      window.alert('Ошибка 0');
+    }
+	});
+};
+
 function list_group_load(){
     $.ajax({
     type: "POST",
     url: "ajax.php",
-    data: "bod_list_droup=1",
+    data: "body_list_group=1",
     success: function(reply){
       if (reply.substring(0,2) == 'Ok') {
       	reply = reply.substring(2);
-      	 $('#bod_list_group').html(reply);
+      	 $('#body_list_group').html(reply);
       	 $('[data-toggle="tooltip"]').tooltip();
       } else {
         window.alert(reply);
       }
     },
     error: function(resp) {
-      window.alert('error');
+      window.alert('Ошибка -0');
     }
   })
 };

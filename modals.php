@@ -1,7 +1,14 @@
 <!--Modals-->
 <?php
-if(isset($_GET['page']))
-	$per_page = "?page=".$_GET['page'];
+if(isset($_GET))
+	$per_page = "?";
+	$get_b_one = false;
+	foreach ($_GET as $get_key => $get_value) {
+		if ($get_b_one) $per_page = $per_page.'&';
+		$per_page = $per_page.$get_key."=".$get_value;
+		$get_b_one = true;
+	}
+	
 ?>
 <?php
 if(isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar){
@@ -13,7 +20,7 @@ if(isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar){
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title">Добавление расписания Бонч</h4>
 		</div>
-		<form enctype="multipart/form-data" role="form" name="add-par-bonch" method="post" action="/">
+		<form enctype="multipart/form-data" role="form" name="add-par-bonch" method="post" action="/<?=$per_page?>">
 			<div class="modal-body">
 				<p>Зайди на эту страницу: <a href="https://cabinet.sut.ru/raspisanie_all_new">линк</a>, сохранить страницу как и загрузить сюда.</p>
 				<div class="form-group">
@@ -133,7 +140,7 @@ if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Добавление пары</h4>
       </div>
-      <form role="form" name="add-para" method="post" action="/">
+      <form role="form" name="add-para" method="post" action="/<?=$per_page?>">
       	<div class="modal-body">
       		<div class="form-group" id="time_input_mob">
 	      		<label for="inputTime">Время</label>
@@ -233,7 +240,7 @@ if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Доступ к редактированию</h4>
       </div>
-	  <form class="form" role="form" name="add-pin" method="post" action="/">
+	  <form class="form" role="form" name="add-pin" method="post" action="/<?=$per_page?>">
 		<div class="modal-body">
 			<div class="form-group">
 				<label for="inputPin1">Пин код для доступа к редактированию группы <?=$name_grup?></label>
@@ -255,7 +262,7 @@ if(isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Добавление группы</h4>
       </div>
-	  <form role="form" name="add-grup" method="post" action="/<?=$per_page?>">
+	  <form role="form" name="add-grup" method="post" action="/<?=$per_page?>"> 
 	  	<div class="modal-body">
 			<div class="form-group">
 				<label for="inputName">Название</label>

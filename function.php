@@ -73,7 +73,7 @@ function load_table_group($mysqli){
 				'{pin}'			=> $result['pin'],
 				'{name}'		=> $result['name']
 			);
-			$list_grups = $list_grups.insert_template("list_group", $mas_name, "list_group");
+			$list_grups = $list_grups.insert_template("list_group_list", $mas_name, "list_group");
 		}
 	}
 	return $list_grups;

@@ -120,13 +120,10 @@ $active_day=false;
 $active_week=false;    //активные кнопки меню
 $active_vibor=true;
 
-if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or (isset($_SESSION['mast'])))){
+if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or (isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar))){
 	$active_vibor=false;
-	if($_SESSION['mast']){
-		$list_ma =array();
-		$list_grups = insert_template("list_group_head", $list_ma, "list_group");
-		$list_grups = $list_grups.load_table_group($mysqli);
-		$list_grups = $list_grups.insert_template("list_group_footer", $list_ma, "list_group");
+	if(isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar){
+		$list_grups = insert_template("list_group", array('{list}'=>load_table_group($mysqli)), "list_group");
 	}
 }
 

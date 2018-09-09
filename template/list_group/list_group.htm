@@ -1,31 +1,19 @@
-<tr id="dell_stroc_droup_{id_grup}">
-	<td>{id_grup}</td>
-	<td style="padding: 3.5px 8px;">
-		<span id="group_name_{id_grup}" style="float: left; margin: 4.5px 0px;">{name}</span>
-		<div class="btn-group" style="float: right; width: 137px;">
-			<div class="btn-group">
-				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" onclick="select_group({id_grup})" data-original-title="Выбрать группу">
-					<span class="glyphicon glyphicon-ok"></span>
-				</span>
-			</div>
-			<div class="btn-group">
-				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" onclick="edit_group({id_grup})" data-original-title="Редактировать группу">
-					<span class="glyphicon glyphicon-edit"></span>
-				</span>
-			</div>
-			<div class="btn-group">
-				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" onclick="clear_raspis_id_group({id_grup}, {pin})" data-original-title="Очистить расписание">
-					<span class="glyphicon glyphicon-trash"></span>
-				</span>
-			</div>
-			<div class="btn-group">
-				<span data-toggle="tooltip" data-container="body" class="btn btn-default btn-sm" style="width:35px;" onclick="dell_group({id_grup}, {pin})" data-original-title="Удалить группу">
-					<span class="glyphicon glyphicon-remove"></span>
-				</span>
-			</div>
-		</div>
-	</td>
-	<td id="group_pin_{id_grup}">{pin}</td>
-	<td id="group_date_{id_grup}">{start}</td>
-	<td>{last-apdata}</td>
-</tr>
+<div class="panel panel-default">
+	<div class="panel-heading">Группы</div>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th><span style="float: left;">Название</span><span style="float: right;">Действие</span></th>
+					<th>Пин</th>
+					<th>Неделя начала симместра</th>
+					<th>Последнее обновление расписания</th>
+				</tr>
+			</thead>
+			<tbody id="body_list_group">
+				{list}
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -122,12 +122,15 @@ function dell_group_run(){
       if (reply == 'Ok') {
         $('#dell_group_modal').modal("hide");
         $('#dell_stroc_droup_'+id_group).remove();
+        myalert('success', 'Группа '+$('#dell_group_name').html()+' удалена');
       } else {
-        window.alert(reply);
+      	myalert('danger', reply);
+        //window.alert(reply);
       }
     },
     error: function(resp) {
-      window.alert('Ошибка 0');
+    	myalert('danger', 'Ошибка 0');
+      //window.alert('Ошибка 0');
     }
   })
 };
@@ -158,13 +161,16 @@ function clear_raspis_id_group_run(){
     success: function(reply){
       if (reply == 'Ok') {
         $('#clear_group_modal').modal("hide");
-        alert("Очишено");
+        myalert('success', 'Расписание группы '+$('#clear_group_name').html()+' очищено');
+        //alert("Очишено");
       } else {
-        window.alert(reply);
+      	myalert('danger', reply);
+        //window.alert(reply);
       }
     },
     error: function(resp) {
-      window.alert('Ошибка 0');
+    	myalert('danger', 'Ошибка 0');
+      //window.alert('Ошибка 0');
     }
   })
 };
@@ -246,14 +252,17 @@ function edit_group_run(){
 	  success: function(reply){
       if (reply == 'Ok') {
         $('#edit_group_modal').modal("hide");
-        alert("Изменено");
+        myalert('success', 'Группа '+$('#edit_group_name_input').val()+' изменена');
+        //alert("Изменено");
         list_group_load();
       } else {
-        window.alert(reply);
+      	myalert('danger', reply);
+        //window.alert(reply);
       }
     },
     error: function(resp) {
-      window.alert('Ошибка 0');
+    	myalert('danger', 'Ошибка 0');
+      //window.alert('Ошибка 0');
     }
 	});
 };
@@ -269,11 +278,13 @@ function list_group_load(){
       	 $('#body_list_group').html(reply);
       	 $('[data-toggle="tooltip"]').tooltip();
       } else {
-        window.alert(reply);
+      	myalert('danger', reply);
+        //window.alert(reply);
       }
     },
     error: function(resp) {
-      window.alert('Ошибка -0');
+    	myalert('danger', 'Ошибка 0');
+      //window.alert('Ошибка -0');
     }
   })
 };
@@ -286,11 +297,10 @@ function myalert(type, text){
     data: "myalert=1&type="+type+"&text="+text+"&cla="+cla,
     success: function(reply){
     	$('#block_alerts').append(reply);
-    	$('.'+cla).slideDown().delay(4000).slideUp();
-
+    	$('.'+cla).slideDown(150).delay(5000).slideUp(150);
     },
     error: function(resp) {
-      window.alert('Ошибка -0');
+      window.alert('Ошибка 0');
     }
   })
 };

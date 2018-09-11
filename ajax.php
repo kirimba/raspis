@@ -60,4 +60,14 @@ if(isset($_POST['edit_group'])){
 			echo "Ошибка 1";
 	}
 }
+if(isset($_POST['myalert'])){
+	if(isset($_POST['type']) && isset($_POST['text']) && isset($_POST['cla'])){
+		$mas_name = array(
+				'{type}'		=> htmlspecialchars($_POST['type']),
+				'{text}'		=> $_POST['text'],
+				'{class}'		=> $_POST['cla']
+			);
+		echo insert_template('alert1', $mas_name);
+	}
+}
 ?>

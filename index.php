@@ -271,6 +271,7 @@ require("code.php");
     }
     ?>
     </div><!-- /.container -->
+    <div id="block_alerts"></div>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="js/jquery-3.1.1.min.js"></script>
 		<script src="js/jquery-ui-1.12.1.min.js"></script>

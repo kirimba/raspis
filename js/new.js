@@ -278,6 +278,23 @@ function list_group_load(){
   })
 };
 
+function myalert(type, text){
+	var cla = Math.random().toString(36).slice(2, 12 );
+    $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: "myalert=1&type="+type+"&text="+text+"&cla="+cla,
+    success: function(reply){
+    	$('#block_alerts').append(reply);
+    	$('.'+cla).slideDown().delay(4000).slideUp();
+
+    },
+    error: function(resp) {
+      window.alert('Ошибка -0');
+    }
+  })
+};
+
 function dann(){
 	var ear;
 	var man;

@@ -95,3 +95,15 @@
   background-color: #61aef1;
   border-color: #60aff5;
 }
+.myalert{
+	margin: 0px auto 7px auto;
+	display: table;
+}
+.myalert button {
+	margin-left: 15px;
+}
+#block_alerts{
+	position: fixed;
+    width: 100%;
+    bottom: 0px;
+}

@@ -70,4 +70,12 @@ if(isset($_POST['myalert'])){
 		echo insert_template('alert1', $mas_name);
 	}
 }
+if(isset($_POST['raspisanie'])){
+	if(isset($_POST['pas']) && isset($_POST['text'])){
+		$pas = htmlspecialchars($_POST['pas']);
+		if($pas == $maspar){
+			echo "ок";
+		}
+	}
+}
 ?>

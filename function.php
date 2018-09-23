@@ -65,6 +65,7 @@ $monthes= array(
 
 function load_table_group($mysqli){
 	if($rez = $mysqli->query( "SELECT * FROM grups")){
+	    $list_grups = "";
 		while($result = $rez->fetch_assoc()){
 			$mas_name = array(
 				'{start}'		=> date("d.m.Y",$result['start']),

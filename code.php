@@ -125,6 +125,7 @@ if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] =
 	if(isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar){
 		$list_grups = insert_template("list_group", array('{list}'=>load_table_group($mysqli)), "list_group");
 	}
+    $list_raspisnaie = insert_template("list", array(), "raspisanie");
 }
 
 if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор группы

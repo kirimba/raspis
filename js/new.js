@@ -175,6 +175,24 @@ function clear_raspis_id_group_run(){
   })
 };
 
+function load_raspisanie(id=0) {
+	if($('#raspispisnie').length) {
+        if (id == 0) {
+        	if($.cookie("id") && $.cookie("id") != "null")
+            var id = $.cookie("id");
+        }
+        myalert('info', id);
+        if($.cookie("pin"+id) && $.cookie("pin"+id) != "null")
+        	var pin = $.cookie("pin" + id);
+        else
+        	var pin = 0;
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+        });
+    }
+};
+
 function edit_group(id){
 	$('#edit_group_modal').modal("show");
 	$('#edit_group_pin_div').removeClass('has-warning');
@@ -349,6 +367,7 @@ function dann(){
 }
 
 window.onload = function(){
+	load_raspisanie();
 	var list1 = document.getElementsByClassName("time_para");
 	var list2 = [];
 	if(list1[0]!=undefined){

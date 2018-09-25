@@ -86,4 +86,20 @@ function insert_template($name, $mas, $categor=""){
 	$body = file_get_contents("template/".$categor.$name.".htm");
 	return strtr($body, $mas);
 }
+
+function show_raspisanie_on_edit(){
+    $list = "";
+    $list2 = "";
+    $list1 = array(
+        '{monday}'=> insert_template("day_no_par", array(), "raspisanie"),
+        '{tuesday}' => insert_template("day", array(), "raspisanie"),
+        '{wednesday}'=> insert_template("day_no_par", array(), "raspisanie"),
+        '{thursday}'=> " ",
+        '{friday}'=> insert_template("day_no_par", array(), "raspisanie"),
+        '{saturday}'=> " ",
+        '{sunday}'=> insert_template("day_no_par", array(), "raspisanie")
+    );
+    $list = insert_template("list_raspisanie", $list1, "raspisanie");
+    return $list;
+}
 ?>

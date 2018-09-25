@@ -120,12 +120,12 @@ $active_day=false;
 $active_week=false;    //активные кнопки меню
 $active_vibor=true;
 
-if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or (isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar))){
+if(($_GET['page'] == 'edit-par') && (isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar)){
 	$active_vibor=false;
-	if(isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar){
-		$list_grups = insert_template("list_group", array('{list}'=>load_table_group($mysqli)), "list_group");
-	}
-    $list_raspisnaie = show_raspisanie_on_edit();
+	$list_grups = insert_template("list_group", array('{list}'=>load_table_group($mysqli)), "list_group");
+	if(isset($id)) {
+        $list_raspisnaie = show_raspisanie_on_edit($mysqli, $id);
+    }
 }
 
 if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор группы
@@ -145,7 +145,11 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 			$day_num = date('w',strtotime('+ 3 hour'));
 			//$week = 13;
 			//$day_num = 2;
-			
+
+            if(($_GET['page'] == 'edit-par') && (isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) && !isset($_SESSION['mast'])){
+                $list_raspisnaie = show_raspisanie_on_edit($mysqli, $id_grup);
+            }
+
 			if(isset($pin) and ($_COOKIE['pin'.$id_grup] == $pin)){ //------------------------------Добавление пары
 				if(isset($_POST['name-par'], $_POST['type-par'], $_POST['num-par'], $_POST['day-par'], $_POST['aud-par'], $_POST['week-par'], $_POST['prepod-par1'], $_POST['time-par1'], $_POST['time-par2']))
 				{

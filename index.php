@@ -126,7 +126,7 @@ require("code.php");
 		</div><!--Информация о дне, неделе, времени-->
 	<?php
 		echo $list_grups;
-		echo $list_raspisnaie;
+		echo '<div id="raspispisnie">'.$list_raspisnaie.'</div>';
 	}
 	else{
 		if((!isset($_COOKIE['id'])) or $vibr_grup){ //Выбор группы

@@ -78,4 +78,14 @@ if(isset($_POST['raspisanie'])){
 		}
 	}
 }
+if(isset($_POST['group_select'])){
+    if(isset($_POST['id']) && (isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar)){
+        $id = htmlspecialchars($_POST['id']);
+        $result = show_raspisanie_on_edit($mysqli, $id);
+        if(substr($result, 0, 4) == "<div")
+            echo 'Ok'.$result;
+        else
+            echo "Ошибка 1";
+    }
+}
 ?>

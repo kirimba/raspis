@@ -14,6 +14,8 @@ var resultget = dann();
 
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
+    var temp_name_group = $('#name_grup_bar').html();
+    $('#name_grup_rasp_edit').html(temp_name_group);
 	if($(window).width()>767){
 		$('#time_input_mob').empty();
 	}else{
@@ -141,7 +143,25 @@ function select_group(id){
 		path: '/',
 	});
 	var name = $('#group_name_'+id).html();
-	$('#name_grup_bar').html(name);
+    $('#name_grup_bar').html(name);
+    myalert('info', name);
+    $.ajax({
+        type: "POST",
+        url: "ajax.php",
+        data: "group_select=1&id="+id,
+        success: function(reply){
+            if (reply.substring(0,2) == 'Ok') {
+                reply = reply.substring(2);
+                $('#raspispisnie').html(reply);
+                $('#name_grup_rasp_edit').html(name);
+            } else {
+                myalert('danger', reply);
+            }
+        },
+        error: function(resp) {
+            myalert('danger', 'Ошибка 0');
+        }
+    })
 };
 
 function clear_raspis_id_group(id, pin){
@@ -367,7 +387,7 @@ function dann(){
 }
 
 window.onload = function(){
-	load_raspisanie();
+	//load_raspisanie();
 	var list1 = document.getElementsByClassName("time_para");
 	var list2 = [];
 	if(list1[0]!=undefined){
@@ -405,19 +425,15 @@ window.setInterval(function(){
 		if(list1[0]!=undefined){
 			for (var i = 0; i < list1.length; i++) {
 				var ii = i+1;
-				var temp = "para_num_" + ii;
-				var temp1 = document.getElementsByClassName(temp);
 				if((hours==list2[i][1] && minutes>=list2[i][2]) || (hours==list2[i][3] && minutes<=list2[i][4]) || (list2[i][1]<hours && hours<list2[i][3])){
-					temp1[0].style.background = "#ffab60";
-					temp1[1].style.background = "#ffab60";
+					$('.para_num_' + ii).css('background-color', '#ffab60');
 				}else{
-					temp1[0].style.background = "#ffffff";
-					temp1[1].style.background = "#ffffff";
+                    $('.para_num_' + ii).css('background-color', '#ffffff');
 				}
 			}
 		}
 	}
 	var str = hours + ':' + minutes + ':' + seconds;
-	document.getElementById('clock').innerHTML = str;
+	$('#clock').html(str);
 }, 1000);
 }

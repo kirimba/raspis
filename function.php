@@ -87,17 +87,27 @@ function insert_template($name, $mas, $categor=""){
 	return strtr($body, $mas);
 }
 
-function show_raspisanie_on_edit(){
-    $list = "";
-    $list2 = "";
+function show_raspisanie_on_edit($mysqli, $group_id){
+
+    $list2['1'] = insert_template("para", array(), "raspisanie");
+    if($group_id == '22')
+        for ($i=0;$i<11;$i++ )
+    $list2['1'] = $list2['1'].insert_template("para", array(), "raspisanie");
+    $list2['1'] = array("{list_pars}"=>$list2['1']);
+    $list2['2'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
+    $list2['3'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
+    $list2['4'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
+    $list2['5'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
+    $list2['6'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
+    $list2['0'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
     $list1 = array(
-        '{monday}'=> insert_template("day_no_par", array(), "raspisanie"),
-        '{tuesday}' => insert_template("day", array(), "raspisanie"),
-        '{wednesday}'=> insert_template("day_no_par", array(), "raspisanie"),
-        '{thursday}'=> " ",
-        '{friday}'=> insert_template("day_no_par", array(), "raspisanie"),
-        '{saturday}'=> " ",
-        '{sunday}'=> insert_template("day_no_par", array(), "raspisanie")
+        '{monday}'      => insert_template("day", $list2['1'], "raspisanie"),
+        '{tuesday}'     => insert_template("day", $list2['2'], "raspisanie"),
+        '{wednesday}'   => insert_template("day", $list2['3'], "raspisanie"),
+        '{thursday}'    => insert_template("day", $list2['4'], "raspisanie"),
+        '{friday}'      => insert_template("day", $list2['5'], "raspisanie"),
+        '{saturday}'    => insert_template("day", $list2['6'], "raspisanie"),
+        '{sunday}'      => insert_template("day", $list2['0'], "raspisanie")
     );
     $list = insert_template("list_raspisanie", $list1, "raspisanie");
     return $list;

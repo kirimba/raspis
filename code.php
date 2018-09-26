@@ -127,8 +127,7 @@ if(($_GET['page'] == 'edit-par') && (isset($_SESSION['mast']) && $_SESSION['mast
         $list_raspisnaie = show_raspisanie_on_edit($mysqli, $id);
     }
 }
-
-if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор группы
+elseif(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор группы
 	$active_vibor=false;
 	$id_grup = htmlspecialchars($_COOKIE['id']);
 	if($rez = $mysqli->query("SELECT * FROM grups WHERE id_grup = $id_grup LIMIT 1")){
@@ -145,10 +144,6 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 			$day_num = date('w',strtotime('+ 3 hour'));
 			//$week = 13;
 			//$day_num = 2;
-
-            if(($_GET['page'] == 'edit-par') && (isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) && !isset($_SESSION['mast'])){
-                $list_raspisnaie = show_raspisanie_on_edit($mysqli, $id_grup);
-            }
 
 			if(isset($pin) and ($_COOKIE['pin'.$id_grup] == $pin)){ //------------------------------Добавление пары
 				if(isset($_POST['name-par'], $_POST['type-par'], $_POST['num-par'], $_POST['day-par'], $_POST['aud-par'], $_POST['week-par'], $_POST['prepod-par1'], $_POST['time-par1'], $_POST['time-par2']))
@@ -172,7 +167,10 @@ if(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор груп�
 				}
 			}//------------------------------Добавление пары
 
-			if($_GET['page'] == 'week'){//на неделю
+            if(($_GET['page'] == 'edit-par') && (isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) && !isset($_SESSION['mast'])){
+                $list_raspisnaie = show_raspisanie_on_edit($mysqli, $id_grup);
+            }
+			elseif($_GET['page'] == 'week'){//на неделю
 				$active_week=true;
 				if(isset($_GET['num']) && is_numeric(htmlspecialchars($_GET['num'])))
 					$week_all = htmlspecialchars($_GET['num']);

@@ -67,6 +67,7 @@ if(isset($_POST['myalert'])){
 				'{text}'		=> $_POST['text'],
 				'{class}'		=> $_POST['cla']
 			);
+        log_in_file($mas_name['{text}']);
 		echo insert_template('alert1', $mas_name);
 	}
 }

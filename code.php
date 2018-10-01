@@ -42,10 +42,13 @@ if(isset($_POST['name-grup'], $_POST['data-tart-grup'], $_POST['pin-grup'])){ //
 	$pin_grup = (int)htmlspecialchars($_POST['pin-grup']);
 	$data_start1 = explode('-', $data_start);
 	$data_start = mktime(0,0,0,$data_start1['1'],$data_start1['2'], $data_start1['0']);
-	if($mysqli->query("INSERT INTO `grups` (`name`, `start`, `pin`) VALUES ('$name_grup', '$data_start', '$pin_grup')"))
-	$alert = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Группа добавлена</div>';
-	else
-	$alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка добавления</div>';
+	if($mysqli->query("INSERT INTO `grups` (`name`, `start`, `pin`) VALUES ('$name_grup', '$data_start', '$pin_grup')")) {
+        $alert = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Группа добавлена</div>';
+        log_in_file('Группа добавлена: '.$name_grup);
+	}else {
+        $alert = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ошибка добавления</div>';
+        log_in_file('Ошибка добавления группы: '.$name_grup);
+	}
 }//-------------------------Добаление группы
 
 if($_SESSION['mast']){//Добавление группы и пар из Бонч

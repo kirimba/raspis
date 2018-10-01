@@ -112,4 +112,10 @@ function show_raspisanie_on_edit($mysqli, $group_id){
     $list = insert_template("list_raspisanie", $list1, "raspisanie");
     return $list;
 }
+function log_in_file($textLog){
+    $file = './logAll.txt';
+    $text = '[' . date('Y-m-d H:i:s') . '] := '; //Добавим актуальную дату
+    $text .= $textLog."\n";//Выводим переданную переменную
+    file_put_contents($file, $text, FILE_APPEND);
+}
 ?>

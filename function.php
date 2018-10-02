@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param $string
+ * @return string
+ */
 function rus2translit($string) {//------функция транслита
     $converter = array(
         'а' => 'a',   'б' => 'b',   'в' => 'v',
@@ -27,33 +31,43 @@ function rus2translit($string) {//------функция транслита
     );
     return strtr($string, $converter);
 } //-------------------------------------Функция транслита
-function day($num111){//--------------------------День недели буквами
-	switch ($num111){
+/**
+ * @param $num
+ * @return string
+ */
+function day($num){//--------------------------День недели буквами
+	switch ($num){
     			case 0:
-	        		$day111 = "Воскресенье";
+	        		$day = "Воскресенье";
 	        		break;
     			case 1:
-			        $day111 = "Понедельник";
+			        $day = "Понедельник";
 			        break;
 			    case 2:
-			        $day111 = "Вторник";
+			        $day = "Вторник";
 			    	break;
 			    case 3:
-	        		$day111 = "Среда";
+	        		$day = "Среда";
 	        		break;
     			case 4:
-			        $day111 = "Четверг";
+			        $day = "Четверг";
 			        break;
 			    case 5:
-			        $day111 = "Пятница";
+			        $day = "Пятница";
 			        break;
 			    case 6:
-			        $day111 = "Суббота";
+			        $day = "Суббота";
 			        break;
+                default:
+                    $day = "Неверные данные";
 			    }
-	return $day111;
+	return $day;
 }//------------------------------------------------День недели буквами
 
+/**
+ * @param $num
+ * @return string
+ */
 function name_monthes($num){//--------------------------Месяц буквами
 $monthes= array(
 1 => 'Января', 2 => 'Февраля', 3 => 'Марта', 4 => 'Апреля',
@@ -63,6 +77,10 @@ $monthes= array(
  return $monthes[$num];
 }//------------------------------------------------Месяц буквами
 
+/**
+ * @param $mysqli
+ * @return string
+ */
 function load_table_group($mysqli){
 	if($rez = $mysqli->query( "SELECT * FROM grups")){
 	    $list_grups = "";
@@ -74,12 +92,18 @@ function load_table_group($mysqli){
 				'{pin}'			=> $result['pin'],
 				'{name}'		=> $result['name']
 			);
-			$list_grups = $list_grups.insert_template("list_group_list", $mas_name, "list_group");
+			$list_grups .= insert_template("list_group_list", $mas_name, "list_group");
 		}
 	}
 	return $list_grups;
 }
 
+/**
+ * @param $name
+ * @param $mas
+ * @param string $categor
+ * @return string
+ */
 function insert_template($name, $mas, $categor=""){
 	if($categor != "")
 		$categor = "/".$categor."/";
@@ -87,31 +111,54 @@ function insert_template($name, $mas, $categor=""){
 	return strtr($body, $mas);
 }
 
+/**
+ * @param $mysqli
+ * @param $group_id
+ * @return string
+ */
 function show_raspisanie_on_edit($mysqli, $group_id){
-
-    $list2['1'] = insert_template("para", array(), "raspisanie");
-    if($group_id == '22')
-        for ($i=0;$i<11;$i++ )
-    $list2['1'] = $list2['1'].insert_template("para", array(), "raspisanie");
-    $list2['1'] = array("{list_pars}"=>$list2['1']);
-    $list2['2'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
-    $list2['3'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
-    $list2['4'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
-    $list2['5'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
-    $list2['6'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
-    $list2['0'] = array("{list_pars}"=>insert_template("para", array(), "raspisanie"));
+    $categoria = "raspisanie";
+    if($rez = $mysqli->query("SELECT * FROM raspis WHERE id_grup = $group_id ORDER BY `para` ASC")) {
+        $list3 = array();
+        if (($rez->num_rows) > 0) {
+            while ($result = $rez->fetch_assoc()) {
+                $prepod = str_replace('<span' ,'<span data-toggle="tooltip"', $result['prepod']);
+                $list4 = array(
+                    '{id}'      => $result['para'],
+                    '{time}'    => $result['time'],
+                    '{name}'    => $result['name'],
+                    '{type}'    => $result['type'],
+                    '{auditor}' => $result['auditor'],
+                    '{prepod}'  => $prepod,
+                    '{weeks}'  => $result['weeks'],
+                );
+                $list3[$result['den']] .= insert_template("para", $list4, $categoria);
+            }
+        }
+    }
+    for($i=0; $i<7; $i++) {
+        if (!empty($list3[$i])) {
+            $list2[$i] = array("{list_pars}" => $list3[$i]);
+        } else {
+            $list2[$i] = array("{list_pars}" => insert_template("no_par", array(), $categoria));
+        }
+    }
     $list1 = array(
-        '{monday}'      => insert_template("day", $list2['1'], "raspisanie"),
-        '{tuesday}'     => insert_template("day", $list2['2'], "raspisanie"),
-        '{wednesday}'   => insert_template("day", $list2['3'], "raspisanie"),
-        '{thursday}'    => insert_template("day", $list2['4'], "raspisanie"),
-        '{friday}'      => insert_template("day", $list2['5'], "raspisanie"),
-        '{saturday}'    => insert_template("day", $list2['6'], "raspisanie"),
-        '{sunday}'      => insert_template("day", $list2['0'], "raspisanie")
+        '{monday}'      => insert_template("day", $list2[1], $categoria),
+        '{tuesday}'     => insert_template("day", $list2[2], $categoria),
+        '{wednesday}'   => insert_template("day", $list2[3], $categoria),
+        '{thursday}'    => insert_template("day", $list2[4], $categoria),
+        '{friday}'      => insert_template("day", $list2[5], $categoria),
+        '{saturday}'    => insert_template("day", $list2[6], $categoria),
+        '{sunday}'      => insert_template("day", $list2[0], $categoria)
     );
-    $list = insert_template("list_raspisanie", $list1, "raspisanie");
+    $list = insert_template("list_raspisanie", $list1, $categoria);
     return $list;
 }
+
+/**
+ * @param $textLog
+ */
 function log_in_file($textLog){
     $file = './logAll.txt';
     $text = '[' . date('Y-m-d H:i:s') . '] := '; //Добавим актуальную дату

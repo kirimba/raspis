@@ -107,3 +107,18 @@
     width: 100%;
     bottom: 0px;
 }
+@media (min-width: 1400px) {
+	.contain {
+		width: 1370px;
+	}
+}
+@media (min-width: 1600px) {
+	.contain {
+		width: 1570px;
+	}
+}
+@media (min-width: 1800px) {
+	.contain {
+		width: 1770px;
+	}
+}

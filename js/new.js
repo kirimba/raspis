@@ -106,6 +106,31 @@ $('#inputSerchDay2').on('changeDate', function() {
 	
 });
 
+function add_para(day) {
+    $('#add_par_modal').modal("show");
+    $('#inputDay').val(day);
+}
+
+function add_para_run() {
+    $.ajax({
+        type: "POST",
+        url: "ajax.php",
+        data: "add_par=1&name_par="+$("#inputName").val()+"&type_par="+$("#inputType").val()+"&num_par="+$("#inputNum").val()+"&day_par="+$("#inputDay").val()+"&week_par="+$("#inputWeek").val()+"&aud_par="+$("#inputAyd").val()+"&prepod_par1="+$("#inputPrepod").val()+"&prepod_par2="+$("#inputPrepod1").val()+"&time_par1="+$("#inputTime").val()+"&time_par2="+$("#inputTime1").val(),
+        success: function(reply){
+        	if(reply=="Ok") {
+        		var name = $('#name_grup_bar').html();
+                myalert('success', "Пара в группу: "+name+" добавлена");
+                $('#add_par_modal').modal("hide");
+                var id = $.cookie('id');
+                raspisanie_show(id, name);
+            }else
+                myalert('danger', reply);
+		},
+        error: function(resp) {}
+    });
+
+}
+
 function dell_group(id, pin){
 	$('#dell_group_modal').modal("show");
 	var id_name = $('#group_name_'+id).html();
@@ -137,23 +162,17 @@ function dell_group_run(){
   })
 };
 
-function select_group(id){
-	$.cookie('id', id, {
-		expires: 30,
-		path: '/',
-	});
-	var name = $('#group_name_'+id).html();
-    $('#name_grup_bar').html(name);
-    myalert('info', name);
+function raspisanie_show(id, name) {
     $.ajax({
         type: "POST",
         url: "ajax.php",
-        data: "group_select=1&id="+id,
+        data: "raspisanie_show=1&id="+id,
         success: function(reply){
             if (reply.substring(0,2) == 'Ok') {
                 reply = reply.substring(2);
                 $('#raspispisnie').html(reply);
                 $('#name_grup_rasp_edit').html(name);
+                $('[data-toggle="tooltip"]').tooltip();
             } else {
                 myalert('danger', reply);
             }
@@ -162,6 +181,16 @@ function select_group(id){
             myalert('danger', 'Ошибка 0');
         }
     })
+}
+function select_group(id){
+	$.cookie('id', id, {
+		expires: 30,
+		path: '/',
+	});
+	var name = $('#group_name_'+id).html();
+    $('#name_grup_bar').html(name);
+    myalert('info', name);
+    raspisanie_show(id, name)
 };
 
 function clear_raspis_id_group(id, pin){

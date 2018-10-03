@@ -117,7 +117,7 @@ function insert_template($name, $mas, $categor=""){
  * @return string
  */
 function show_raspisanie_on_edit($mysqli, $group_id){
-    $categoria = "raspisanie";
+    $categoria = "raspisanie_var1";
     if($rez = $mysqli->query("SELECT * FROM raspis WHERE id_grup = $group_id ORDER BY `para` ASC")) {
         $list3 = array();
         if (($rez->num_rows) > 0) {
@@ -138,9 +138,15 @@ function show_raspisanie_on_edit($mysqli, $group_id){
     }
     for($i=0; $i<7; $i++) {
         if (!empty($list3[$i])) {
-            $list2[$i] = array("{list_pars}" => $list3[$i]);
+            $list2[$i] = array(
+                "{list_pars}"   => $list3[$i],
+                '{day}'         => $i
+            );
         } else {
-            $list2[$i] = array("{list_pars}" => insert_template("no_par", array(), $categoria));
+            $list2[$i] = array(
+                "{list_pars}"   => insert_template("no_par", array(), $categoria),
+                '{day}'         => $i
+            );
         }
     }
     $list1 = array(

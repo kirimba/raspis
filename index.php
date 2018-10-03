@@ -110,14 +110,11 @@ require("code.php");
           </ul>
         </div><!--/.nav-collapse -->
     </div><!--Строка меню-->
-    <div style="margin-top: 70px; height: 100%;" class="container">
-	<?php
-	if(isset($alert))
-			echo $alert;
-	?>
+
 	<?php
 	if(($_GET['page'] == 'edit-par') && ((isset($pin) && ($_COOKIE['pin'.$id_grup] == $pin)) or ($_SESSION['mast']))){
 	?>
+        <div class="contain container">
 		<div class="alert alert-info"><!--Информация о дне, неделе, времени-->
 			<div class="row text-center">
 				<div class="col-md-6 col-xs-12"><h3 class="panel-title">Сегодня: <b><?=day($day_num)?></b></h3></div>
@@ -129,6 +126,11 @@ require("code.php");
 		echo '<div id="raspispisnie">'.$list_raspisnaie.'</div>';
 	}
 	else{
+	    ?>
+            <div style="margin-top: 70px; height: 100%;" class="container">
+	    <?php
+        if(isset($alert))
+            echo $alert;
 		if((!isset($_COOKIE['id'])) or $vibr_grup){ //Выбор группы
 	    	if($rez = $mysqli->query( "SELECT * FROM grups")){
 			?>

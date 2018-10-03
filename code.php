@@ -126,9 +126,6 @@ $active_vibor=true;
 if(($_GET['page'] == 'edit-par') && (isset($_SESSION['mast']) && $_SESSION['mast'] == $maspar)){
 	$active_vibor=false;
 	$list_grups = insert_template("list_group", array('{list}'=>load_table_group($mysqli)), "list_group");
-	if(isset($id)) {
-        $list_raspisnaie = show_raspisanie_on_edit($mysqli, $id);
-    }
 }
 elseif(!((!isset($_COOKIE['id'])) or $vibr_grup)){ //после Выбор группы
 	$active_vibor=false;

@@ -9,22 +9,23 @@ if($mysqli->query("CREATE TABLE `grups` (
   `pin` int(5) NOT NULL DEFAULT '1111',
   `time-start-par` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"))
-	echo "Таблица grups создана";
+	echo "<p>Таблица grups создана</p>";
 else
-	echo "Ошибка созлания grups";
+	echo "<p>Ошибка созлания grups</p>";
 if($mysqli->query("CREATE TABLE `raspis` (
   `id` int(10) NOT NULL,
   `id_grup` int(10) NOT NULL,
-  `para` int(1) NOT NULL,
+  `time` varchar(15) NOT NULL,
+  `para` varchar(5) NOT NULL,
   `den` int(1) NOT NULL,
   `name` text NOT NULL,
   `type` text NOT NULL,
   `weeks` varchar(100) NOT NULL,
-  `auditor` varchar(10) NOT NULL,
+  `auditor` varchar(100) NOT NULL,
   `prepod` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;"))
-	echo "Таблица raspis создана";
+	echo "<p>Таблица raspis создана</p>";
 else
-	echo "Ошибка созлания raspis";
+	echo "<p>Ошибка созлания raspis</p>";
 $mysqli->close();
 ?>

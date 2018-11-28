@@ -27,6 +27,9 @@
 //echo $grup;
 //echo "<br>";
 //$pos = stristr($pos, '</td>');
+
+$logg = false;
+
 $pos = stristr($pos, '<td');
 $i=1;
 $time_start_par = "";
@@ -38,37 +41,48 @@ do{
 	$num_par = $temp[0];
 	$time_st_par = $temp[1];
 	$time_start_par = $time_start_par.' '.$temp[1];
-	//echo $num_par;
-	//echo "|";
-	//echo $time_start_par;
-	//echo "<br>";
+	if($logg){
+		echo "<br>";
+		echo $num_par;
+		echo "|";
+		echo $time_start_par;
+		echo "<br>";
+	}
 	$para = stristr($para, '</td>');
 	$para = stristr($para, '<td');
-
-	//echo "||";
+	if($logg)
+		echo "||";
 	$day_par = 1;
 	do{
 		$den = substr($para, 0, strpos($para, '</td>')+5);
 		if($den != '<td>&nbsp;</td>'){
 			do{
 			$name_par = strip_tags(substr($den, 0, strpos($den, '</span>')+7));
-			//echo $name_par;
-			//echo "|";
+			if($logg){
+				echo $name_par;
+				echo "|";
+			}
 			$den = stristr($den, '<small>');
 			$type_par = strip_tags(substr($den, 0, strpos($den, '<br>')+4));
 			$type_par = substr($type_par, 1, strlen($type_par)-3);
-			//echo $type_par;
-			//echo "|";
+			if($logg){
+				echo $type_par;
+				echo "|";
+			}
 			$den = stristr($den, '<br><span');
 			$den = stristr($den, '<span');
 			$nedel = strip_tags(substr($den, 0, strpos($den, '<br>')+4));
 			$nedel = substr($nedel, 1, strlen($nedel)-4);
-			//echo $nedel;
-			//echo "|";
+			if($logg){
+				echo $nedel;
+				echo "|";
+			}
 			$den = stristr($den, '<br><span');
 			$prepod_par = substr($den, 4, strpos($den, '</span>')+3);
-			//echo $prepod_par;
-			//echo "|";
+			if($logg){
+				echo $prepod_par;
+				echo "|";
+			}
 			$den = substr($den, strpos($den, '</span>')+7);
 			$temp = strpos($den, '<hr>');
 			if($temp === FALSE){
@@ -76,27 +90,38 @@ do{
 				$aud_par = $temp[1].$temp[2].$temp[3].$temp[4].$temp[5].$temp[6].$temp[7].$temp[8].$temp[9].$temp[10];
 				//$aud_par = substr($den, 7, strpos($den, '</td>')+5);
 				$query_add_par .= "INSERT INTO `raspis` (`id_grup`, `time`, `para`, `den`, `name`, `type`, `weeks`, `auditor`, `prepod`) VALUES ('$id_grup', '$time_st_par', '$num_par', '$day_par', '$name_par', '$type_par', '$nedel', '$aud_par', '$prepod_par');";
-				//echo $aud_par;
-				//echo "<br>";
+				if($logg){
+					echo $aud_par;
+					echo "<br>";
+				}
 				break;
 			}else{
 				$temp = explode(" ", ltrim(strip_tags(substr($den, 0, strpos($den, '<hr>')+4))));
 				$aud_par = $temp[1].$temp[2].$temp[3].$temp[4].$temp[5].$temp[6].$temp[7].$temp[8].$temp[9].$temp[10];
 				//$aud_par = substr($den, 7, strpos($den, '<hr>')+4);
 				$query_add_par .= "INSERT INTO `raspis` (`id_grup`, `time`, `para`, `den`, `name`, `type`, `weeks`, `auditor`, `prepod`) VALUES ('$id_grup', '$time_st_par', '$num_par', '$day_par', '$name_par', '$type_par', '$nedel', '$aud_par', '$prepod_par');";
-				//echo $aud_par;
-				//echo "<br>";
+				if($logg){
+					echo $aud_par;
+					echo "<br>";
+				}
 				$den = stristr($den, '<hr>');
 			}
 			}while(1==$i);
-			//echo $den;
+			if($logg){
+				echo $den;
+			}
 			$day_par++;
 		}else
 		$day_par++;
-		//echo $den;
+		if($logg){
+			echo $den;
+			echo "<br>";
+			echo "<br>";
+		}
 		$para = stristr($para, '</td>');
 		if($para == '</td></tr>'){
-			//echo "$num_par пары закончились<br>";
+			if($logg)
+				echo "$num_par пары закончились<br>";
 			break;
 		}
 		$para = stristr($para, '<td');
@@ -104,7 +129,8 @@ do{
 	}
 	$pos = stristr($pos, '</tr>');
 	if($pos == '</tr>'){
-		//echo "расписание закончилось";
+		if($logg)
+			echo "расписание закончилось";
 		break;
 	}
 	$pos = stristr($pos, '<tr>');

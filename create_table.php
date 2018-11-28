@@ -2,7 +2,7 @@
 require("config.php");
 
 if($mysqli->query("CREATE TABLE `grups` (
-  `id_grup` int(10) NOT NULL,
+  `id_grup` int(10) primary key AUTO_INCREMENT,
   `name` text COLLATE utf8_unicode_ci NOT NULL,
   `start` int(15) NOT NULL,
   `last-apdata` text COLLATE utf8_unicode_ci NOT NULL,
@@ -13,7 +13,7 @@ if($mysqli->query("CREATE TABLE `grups` (
 else
 	echo "<p>Ошибка созлания grups</p>";
 if($mysqli->query("CREATE TABLE `raspis` (
-  `id` int(10) NOT NULL,
+  `id` int(10) primary key AUTO_INCREMENT,
   `id_grup` int(10) NOT NULL,
   `time` varchar(15) NOT NULL,
   `para` varchar(5) NOT NULL,
